@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 //imorting my components
 import Header from './HeaderComponent';
 import Home from './HomeComponent';
+import Footer from './FooterComponent';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
 
@@ -17,6 +18,7 @@ class Main extends Component{
                         <Redirect to="/home" />
                     </Switch>
                 </div>
+                <Footer />
             </div>
         );
     }

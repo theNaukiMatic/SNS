@@ -15,6 +15,9 @@ class Home extends Component{
                         </div>
                     </div>
                 </Jumbotron>
+                <div className="container">
+                    <h1>Home</h1>
+                </div>
             </div>
         );
     }
