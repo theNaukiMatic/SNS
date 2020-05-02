@@ -56,8 +56,33 @@ class AuthorDetail extends Component{
 function onError(e){
     console.log("error in file viewer");
   }
-
-function RenderNotices({notices}){
+function RenderComments({comments}){
+    const com = comments.map((comment) => {
+        return(
+                <div className="row" key={comment._id}>
+                    <div className="col-8 offset-1">
+                        <p>-- {comment.message}<strong> by {comment.author.firstname}</strong></p>
+                        {/* <p>--by {comment.author.firstname}</p> */}
+                    </div>
+                </div>
+        );
+    });
+    if (com === null){
+        return(<div></div>);
+    }
+    return(
+        <div>
+            <hr></hr>
+            <div className="row">
+                <div className="col-8 offset-1">
+                    <h4>Comments</h4>
+                </div>
+            </div>
+            {com}
+        </div>
+    );
+}
+function RenderNotices({notices,comments}){
     const not = notices.map((notice) =>{
         
 
@@ -75,12 +100,13 @@ function RenderNotices({notices}){
                             onError={onError}
                         /> */}
                         <hr></hr>
-                        <div classNamr="row">
+                        <div className="row">
                             <div className="col-6">
                                 <p>by: {<AuthorDetail author={notice.author} />}
                                 on {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(notice.dateofpost)))}</p>
                             </div>
                         </div>
+                        <RenderComments comments={comments.filter((coms) => coms.notice._id === notice._id)}/>
                         
                     </CardBody>
                 </Card>
@@ -111,7 +137,7 @@ function Notice(props){
                     <h1><span className="fa fa-envelope"></span>   Notice Board</h1>
                 </div>
             </div>
-            <RenderNotices notices={props.notice} />
+            <RenderNotices notices={props.notice} comments={props.comments} />
         
         </div>
     );

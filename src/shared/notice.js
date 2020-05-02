@@ -42,7 +42,7 @@ export const NOTICE = [
         "filePath": "public/files/pam1.pdf",
         "fileType": "pdf",
         "dateofpost": "2020-05-01T21:51:43.005Z",
-        "_id": "1232124124",
+        "_id": "1232124156",
         "__v": 0
     },
     

@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 //remove later after connecting to redux
 import {USERS} from '../shared/users';
 import {NOTICE} from '../shared/notice';
+import {NOTICECOM} from '../shared/noticeComments';
 //
 
 //imorting my components
@@ -33,7 +34,8 @@ class Main extends Component{
         super(props);
         this.state = {
             users:USERS,
-            notice:NOTICE
+            notice:NOTICE,
+            noticeComments:NOTICECOM
         }
     }
     render(){
@@ -44,7 +46,7 @@ class Main extends Component{
                     <Switch>
                         <Route path='/home' component={() => <Home />} />
                         <Route path="/profile" component={() => <Profile users={this.state.users}/>} />
-                        <Route path="/notice_board" component={() => <Notice notice={this.state.notice}/>} />
+                        <Route path="/notice_board" component={() => <Notice notice={this.state.notice} comments={this.state.noticeComments}/>} />
                         <Redirect to="/home" />
                     </Switch>
                 </div>
