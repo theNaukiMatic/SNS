@@ -35,6 +35,8 @@ class Header extends Component{
                 <div className="container">
                     <NavbarToggler onClick={this.toggleNav} />
                     <NavbarBrand className="mr-10" href="/">Student Networking System</NavbarBrand>
+
+                    {/* Navigation links */}
                     <Collapse isOpen={this.state.isNavOpen} navbar>
                         <Nav navbar>
                             <NavItem>
@@ -42,6 +44,9 @@ class Header extends Component{
                             </NavItem>
                             <NavItem>
                                 <NavLink className="nav-link" to='/notice'>Notice Board</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to='/profile'>Your Profile</NavLink>
                             </NavItem>
                         </Nav>
                         <Nav className="ml-auto" navbar>
@@ -55,7 +60,7 @@ class Header extends Component{
 
 
 
-                {/* Login Model */}
+                {/* Login Modal */}
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
                     <ModalBody>
@@ -81,6 +86,7 @@ class Header extends Component{
                             </Form>
                     </ModalBody>
                 </Modal>
+                {/* Login Modal ends */}
             </div>
         );
     }
