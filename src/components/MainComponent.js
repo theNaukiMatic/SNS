@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 //remove later after connecting to redux
 import {USERS} from '../shared/users';
+import {NOTICE} from '../shared/notice';
 //
 
 //imorting my components
@@ -31,7 +32,8 @@ class Main extends Component{
     constructor(props){
         super(props);
         this.state = {
-            users:USERS
+            users:USERS,
+            notice:NOTICE
         }
     }
     render(){
@@ -42,7 +44,7 @@ class Main extends Component{
                     <Switch>
                         <Route path='/home' component={() => <Home />} />
                         <Route path="/profile" component={() => <Profile users={this.state.users}/>} />
-                        <Route path="/notice_board" component={() => <Notice />} />
+                        <Route path="/notice_board" component={() => <Notice notice={this.state.notice}/>} />
                         <Redirect to="/home" />
                     </Switch>
                 </div>
