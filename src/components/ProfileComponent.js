@@ -1,18 +1,19 @@
 import React, {Component} from 'react';
 
-import {Card, CardImg ,CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody,Row, Col, Label, ModalFooter} from 'reactstrap';
+import {Card, CardImg ,CardBody,  Breadcrumb, BreadcrumbItem, Button, Row, Col, Label} from 'reactstrap';
 import { Control, Form, Errors } from 'react-redux-form';
+import {Link} from 'react-router-dom';
 
 
 function RenderProfile({user}){
     return(
         <div className="row">
-            <div className="col-12 col-md-3 offset-md-2">
+            <div className="col-12 col-md-3 offset-md-1">
                 <Card>
                     <CardImg top src={user.image} alt={user.firstname} />
                 </Card>
             </div>
-            <div className="col-12 col-md-6">
+            <div className="col-12 col-md-7">
                 <Card>
                     <CardBody>
                         <div className="row">
@@ -100,8 +101,14 @@ class ProfileForm extends Component{
 function Profile(props){
     return(
         <div className="container">
-            <div className="row mt-5">
-                <div className="col-12 col-md-6 offset-md-5">
+            <div className="row">
+                <Breadcrumb>
+                    <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
+                    <BreadcrumbItem active>Your Profile</BreadcrumbItem>
+                </Breadcrumb>
+            </div>
+            <div className="row">
+                <div className="col-12 col-md-6 offset-md-4">
                     <h1>Your Profile</h1>
                 </div>
             </div>

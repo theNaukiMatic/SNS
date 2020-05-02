@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Nav, Navbar, NavbarBrand ,NavItem, Button, NavbarToggler, Collapse,
     Modal, ModalHeader, ModalBody,
     Form, FormGroup, Input, Label} from 'reactstrap';
+    import {Jumbotron} from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
 class Header extends Component{
@@ -34,7 +35,7 @@ class Header extends Component{
                 <Navbar dark expand="md">
                 <div className="container">
                     <NavbarToggler onClick={this.toggleNav} />
-                    <NavbarBrand className="mr-10" href="/">Student Networking System</NavbarBrand>
+                    <NavbarBrand className="mr-10" href="/">SNS</NavbarBrand>
 
                     {/* Navigation links */}
                     <Collapse isOpen={this.state.isNavOpen} navbar>
@@ -43,7 +44,7 @@ class Header extends Component{
                                 <NavLink className="nav-link" to='/home'>Home</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to='/notice'>Notice Board</NavLink>
+                                <NavLink className="nav-link" to='/notice_board'>Notice Board</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink className="nav-link" to='/profile'>Your Profile</NavLink>
@@ -87,6 +88,16 @@ class Header extends Component{
                     </ModalBody>
                 </Modal>
                 {/* Login Modal ends */}
+                <Jumbotron>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-12 col-sm-6">
+                                <h1>Student Networking System</h1>
+                                <p> blah blah blah blah ... </p>
+                            </div>
+                        </div>
+                    </div>
+                </Jumbotron>
             </div>
         );
     }

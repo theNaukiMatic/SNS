@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 //remove later after connecting to redux
-import {USERS} from '../shared/users'
+import {USERS} from '../shared/users';
 //
 
 //imorting my components
@@ -9,10 +9,12 @@ import Header from './HeaderComponent';
 import Home from './HomeComponent';
 import Footer from './FooterComponent';
 import Profile from './ProfileComponent';
+import Notice from './NoticeComponent';
 //
 
 import { Switch, Route, Redirect , withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
+
 
 const mapStateToProps = state => {
     return {
@@ -40,6 +42,7 @@ class Main extends Component{
                     <Switch>
                         <Route path='/home' component={() => <Home />} />
                         <Route path="/profile" component={() => <Profile users={this.state.users}/>} />
+                        <Route path="/notice_board" component={() => <Notice />} />
                         <Redirect to="/home" />
                     </Switch>
                 </div>
