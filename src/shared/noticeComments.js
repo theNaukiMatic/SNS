@@ -1,47 +1,50 @@
 export const NOTICECOM = [
     {
-        "message": "argrgrggr",
+        "_id": "5eadfbd62e775d5324adf06f",
+        "comment": "fawefffarfrefrggrrearrgrerg",
+        "notice": "1232124124",
         "author": {
-            "firstname": "Ishan",
-            "lastname": "Agrawal",
+            "firstname": "nauki",
+            "lastname": "1999",
             "admin": true,
-            "teacher": false,
+            "teacher": true,
             "aaa": false,
-            "dateofbirth": null,
-            "bio": "",
-            "image": "",
-            "_id": "5eac095b9b7ef840902b93fb",
-            "username": "Ishan Agrawal",
-            "facebookId": "2593677810844392",
+            "dateofbirth": "1999-10-10T18:30:00.000Z",
+            "bio": "hello guys",
+            "image": "public/images/nauki_1588381075148_logo.png",
+            "email": "",
+            "_id": "5eac94db0120923b882c2277",
+            "username": "nauki",
+            "createdAt": "2020-05-01T21:30:03.961Z",
+            "updatedAt": "2020-05-02T00:57:55.156Z",
             "__v": 0
         },
-        "notice": [
-            {
-                "message": "aefgrgagrargrgrgr",
-                "title": "this is a notice",
-                "author": {
-                    "firstname": "Ishan",
-                    "lastname": "Agrawal",
-                    "admin": true,
-                    "teacher": false,
-                    "aaa": false,
-                    "dateofbirth": null,
-                    "bio": "",
-                    "image": "",
-                    "_id": "5eac095b9b7ef840902b93fb",
-                    "username": "Ishan Agrawal",
-                    "facebookId": "2593677810844392",
-                    "__v": 0
-                },
-                "filePath": "public/files/pam1.pdf",
-                "fileType": "pdf",
-                "dateofpost": "2020-05-01T21:51:43.005Z",
-                "_id": "1232124124",
-                "__v": 0
-            }
-            
-        ],
-        "_id": "ef33333f4qf4q4f4f4scv4",
+        "createdAt": "2020-05-02T23:01:42.750Z",
+        "updatedAt": "2020-05-02T23:01:42.750Z",
+        "__v": 0
+    },
+    {
+        "_id": "5eae055d2e775d5324adf070",
+        "comment": "hahahahahah",
+        "notice": "1232124156",
+        "author": {
+            "firstname": "blahman",
+            "lastname": "1999",
+            "admin": true,
+            "teacher": true,
+            "aaa": false,
+            "dateofbirth": "1999-10-10T18:30:00.000Z",
+            "bio": "hello guys",
+            "image": "public/images/nauki_1588381075148_logo.png",
+            "email": "",
+            "_id": "5eac94db0120923b882c2277",
+            "username": "nauki",
+            "createdAt": "2020-05-01T21:30:03.961Z",
+            "updatedAt": "2020-05-02T00:57:55.156Z",
+            "__v": 0
+        },
+        "createdAt": "2020-05-02T23:42:21.868Z",
+        "updatedAt": "2020-05-02T23:42:21.868Z",
         "__v": 0
     }
 ]

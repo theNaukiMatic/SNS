@@ -61,7 +61,7 @@ function RenderComments({comments}){
         return(
                 <div className="row" key={comment._id}>
                     <div className="col-8 offset-1">
-                        <p>-- {comment.message}<strong> by {comment.author.firstname}</strong></p>
+                        <p>-- {comment.comment}<strong> by {comment.author.firstname}</strong></p>
                         {/* <p>--by {comment.author.firstname}</p> */}
                     </div>
                 </div>
@@ -106,7 +106,9 @@ function RenderNotices({notices,comments}){
                                 on {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(notice.dateofpost)))}</p>
                             </div>
                         </div>
-                        <RenderComments comments={comments.filter((coms) => coms.notice._id === notice._id)}/>
+                        <RenderComments comments={comments.filter((coms) => coms.notice === notice._id)}/>
+
+                        {/* <RenderComments comments={comments}/> */}
                         
                     </CardBody>
                 </Card>
@@ -137,7 +139,7 @@ function Notice(props){
                     <h1><span className="fa fa-envelope"></span>   Notice Board</h1>
                 </div>
             </div>
-            <RenderNotices notices={props.notice} comments={props.comments} />
+            <RenderNotices notices={props.notices} comments={props.comments} />
         
         </div>
     );

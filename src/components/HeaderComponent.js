@@ -3,8 +3,7 @@ import {Nav, Navbar, NavbarBrand ,NavItem, Button, NavbarToggler, Collapse,
     Modal, ModalHeader, ModalBody,
     Form, FormGroup, Input, Label} from 'reactstrap';
     import {Jumbotron} from 'reactstrap';
-import { NavLink } from 'react-router-dom';
-
+import { NavLink , Link} from 'react-router-dom';
 class Header extends Component{
 
     constructor(props) {
@@ -85,6 +84,7 @@ class Header extends Component{
                                 </FormGroup>
                                 <Button type="submit" value="submit">Login</Button>
                             </Form>
+                            <Link to='/signup' onClick={this.toggleModal}>New User ?</Link>
                     </ModalBody>
                 </Modal>
                 {/* Login Modal ends */}
