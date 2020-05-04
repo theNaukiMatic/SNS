@@ -156,3 +156,44 @@ export const addNotices = (noitces) => ({
     type: ActionTypes.ADD_NOTICES,
     payload: noitces
 });
+
+
+//for downlading groupchat
+
+export const fetchGroupchat = () => (dispatch) => {
+
+    dispatch(groupchatLoading());
+
+    return fetch(baseUrl + 'groupchats')
+        .then(response => {
+            if (response.ok) {
+            return response;
+            } else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+            }
+        },
+        error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+        })
+        .then (response => response.json())
+        .then (groupchat => dispatch(addGroupchat(groupchat)))
+        .catch(error => dispatch(groupchatFailed(error.message)));
+        
+}
+export const groupchatLoading = () => ({
+    type: ActionTypes.GROUPCHAT_LOADING
+});
+
+export const groupchatFailed = (errmess) => ({
+    type: ActionTypes.GROUPCHAT_FAILED,
+    payload: errmess
+});
+
+export const addGroupchat = (groupchat) => ({
+    type: ActionTypes.ADD_GROUPCHAT,
+    payload: groupchat
+});
+

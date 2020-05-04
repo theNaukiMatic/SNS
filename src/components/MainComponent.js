@@ -11,7 +11,7 @@ import Groups from './GroupsComponent';
 import GroupDetail from './GroupDetailComponent';
 //
 
-import { fetchUsers,fetchGroups,fetchComments,fetchNotices} from '../redux/ActionCreators';
+import { fetchUsers,fetchGroups,fetchComments,fetchNotices,fetchGroupchat} from '../redux/ActionCreators';
 
 import { Switch, Route, Redirect , withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -31,7 +31,8 @@ const mapDispatchToProps = dispatch => ({
     fetchUsers: () =>{dispatch(fetchUsers())},
     fetchGroups: () =>{dispatch(fetchGroups())},
     fetchComments: () =>{dispatch(fetchComments())},
-    fetchNotices: () =>{dispatch(fetchNotices())}
+    fetchNotices: () =>{dispatch(fetchNotices())},
+    fetchGroupchat: () =>{dispatch(fetchGroupchat())}
 });
 
 
@@ -47,6 +48,7 @@ class Main extends Component{
         this.props.fetchGroups();
         this.props.fetchComments();
         this.props.fetchNotices();
+        this.props.fetchGroupchat();
       }
     
     render(){
@@ -59,7 +61,9 @@ class Main extends Component{
                             groupIsLoading={this.props.groups.isLoading}
                             groupErrMess={this.props.groups.errMess}
 
-                            groupchat={this.props.groupchat.filter((chat) => chat.group === match.params.groupId)}
+                            groupchat={this.props.groupchat.groupchat.filter((chat) => chat.group === match.params.groupId)}
+                            groupchatIsLoading={this.props.groupchat.isLoading}
+                            groupchatErrMess={this.props.groupchat.errMess}
               />
               );
           };

@@ -85,6 +85,26 @@ class GroupDetail extends Component{
                 </div>
             );
         }
+        else if (this.props.groupchatIsLoading) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <Loading />
+                    </div>
+                </div>
+            );
+        }
+        else if (this.props.groupchatErrMess) {
+            return(
+                <div className="container">
+                    <div className="row"> 
+                        <div className="col-12">
+                            <h4>{this.props.groupchatErrMess}</h4>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
         else
         return(
             <div className="container">
