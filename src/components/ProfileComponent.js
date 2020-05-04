@@ -149,6 +149,7 @@ class ProfileForm extends Component{
 }
 
 function Profile(props){
+    console.log(props.auth.user);
     if (props.users.isLoading) {
         return(
             <div className="container">
@@ -179,7 +180,7 @@ function Profile(props){
                     </Breadcrumb>
                 </div>
 
-                <RenderProfile user={props.users.users.filter((user) => user._id === "5eac095b9b7ef840902b93fb")[0]} />
+                <RenderProfile user={props.users.users.filter((user) => user.username === props.auth.user.username)[0]} />
 
                 <LocalForm className="mt-5">
                     <Row className="form-group">

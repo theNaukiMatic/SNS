@@ -57,6 +57,7 @@ class Main extends Component{
       }
     
     render(){
+        console.log(this.props.users);
 
 
         const GroupwithId = ({match}) => {
@@ -93,11 +94,10 @@ class Main extends Component{
                     <Switch>
                         <Route path='/home' component={() => <Home />} />
                         <Route exact path='/signup' component={() => <Signup postSignup={this.props.postSignup}/>} />
-                        <PrivateRoute exact path="/profile" component={() => <Profile users={this.props.users}/>} />
+                        <PrivateRoute exact path="/profile" component={() => <Profile users={this.props.users} auth={this.props.auth}/>} />
                         <PrivateRoute exact path="/notice_board" component={() => <Notice notices={this.props.notices} comments={this.props.comments} />} />
                         <PrivateRoute exact path='/groups' component={() => <Groups groups={this.props.groups}/>} />
                         <PrivateRoute path='/groups/:groupId' component={GroupwithId} />
-                        
                         <Redirect to="/home" />
                     </Switch>
                 </div>

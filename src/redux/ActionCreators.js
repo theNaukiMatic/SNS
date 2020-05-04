@@ -140,8 +140,13 @@ export const logoutUser = () => (dispatch) => {
 export const fetchUsers = () => (dispatch) => {
 
     dispatch(usersLoading());
+    const bearer = 'Bearer ' + localStorage.getItem('token');
 
-    return fetch(baseUrl + 'users')
+    return fetch(baseUrl + 'users',{
+        headers: {
+            'Authorization': bearer
+        },
+    })
         .then(response => {
             if (response.ok) {
             return response;
