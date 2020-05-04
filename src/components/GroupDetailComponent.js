@@ -4,6 +4,9 @@ import {Link} from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import GroupMembers from './GroupMembers';
 
+import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
+
 class Messages extends Component{
     constructor(props){
         super(props);
@@ -62,6 +65,27 @@ class GroupDetail extends Component{
         super(props);
     }
     render(){
+        if (this.props.groupIsLoading) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <Loading />
+                    </div>
+                </div>
+            );
+        }
+        else if (this.props.groupErrMess) {
+            return(
+                <div className="container">
+                    <div className="row"> 
+                        <div className="col-12">
+                            <h4>{this.props.groupErrMess}</h4>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        else
         return(
             <div className="container">
                 <div className="row">
