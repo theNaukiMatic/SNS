@@ -11,7 +11,7 @@ import Groups from './GroupsComponent';
 import GroupDetail from './GroupDetailComponent';
 //
 
-import { fetchUsers,fetchGroups} from '../redux/ActionCreators';
+import { fetchUsers,fetchGroups,fetchComments} from '../redux/ActionCreators';
 
 import { Switch, Route, Redirect , withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -29,7 +29,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   
     fetchUsers: () =>{dispatch(fetchUsers())},
-    fetchGroups: () =>{dispatch(fetchGroups())}
+    fetchGroups: () =>{dispatch(fetchGroups())},
+    fetchComments: () =>{dispatch(fetchComments())}
 });
 
 
@@ -43,6 +44,7 @@ class Main extends Component{
     componentDidMount() {
         this.props.fetchUsers();
         this.props.fetchGroups();
+        this.props.fetchComments();
       }
     
     render(){
@@ -54,7 +56,7 @@ class Main extends Component{
               <GroupDetail  group={this.props.groups.groups.filter((group) => group._id === match.params.groupId)[0]}
                             groupIsLoading={this.props.groups.isLoading}
                             groupErrMess={this.props.groups.errMess}
-                            
+
                             groupchat={this.props.groupchat.filter((chat) => chat.group === match.params.groupId)}
               />
               );

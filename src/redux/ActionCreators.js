@@ -2,7 +2,7 @@ import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
 
-//for Users
+//for downloading Users
 export const fetchUsers = () => (dispatch) => {
 
     dispatch(usersLoading());
@@ -40,7 +40,7 @@ export const addUsers = (users) => ({
     payload: users
 });
 
-//for Groups
+//for downloading Groups
 
 export const fetchGroups = () => (dispatch) => {
 
@@ -77,4 +77,43 @@ export const groupsFailed = (errmess) => ({
 export const addGroups = (groups) => ({
     type: ActionTypes.ADD_GROUPS,
     payload: groups
+});
+
+//for downloading comments
+
+export const fetchComments = () => (dispatch) => {
+
+    dispatch(commentsLoading());
+
+    return fetch(baseUrl + 'comments')
+        .then(response => {
+            if (response.ok) {
+            return response;
+            } else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+            }
+        },
+        error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+        })
+        .then (response => response.json())
+        .then (comments => dispatch(addComments(comments)))
+        .catch(error => dispatch(commentsFailed(error.message)));
+        
+}
+export const commentsLoading = () => ({
+    type: ActionTypes.COMMENTS_LOADING
+});
+
+export const commentsFailed = (errmess) => ({
+    type: ActionTypes.COMMENTS_FAILED,
+    payload: errmess
+});
+
+export const addComments = (comments) => ({
+    type: ActionTypes.ADD_COMMENTS,
+    payload: comments
 });

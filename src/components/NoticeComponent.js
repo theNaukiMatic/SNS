@@ -5,6 +5,9 @@ import FileViewer from 'react-file-viewer';
 import { CustomErrorComponent } from 'custom-error';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 
+import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
+
 class AuthorDetail extends Component{
     constructor(props){
         super(props);
@@ -146,7 +149,27 @@ function RenderNotices({notices,comments}){
 
 
 function Notice(props){
-
+    if (props.comments.isLoading) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (props.comments.errMess) {
+        return(
+            <div className="container">
+                <div className="row"> 
+                    <div className="col-12">
+                        <h4>{props.comments.errMess}</h4>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+    else
     return(
         <div className="container">
             <div className="row">
@@ -160,7 +183,7 @@ function Notice(props){
                     <h1><span className="fa fa-envelope"></span>   Notice Board</h1>
                 </div>
             </div>
-            <RenderNotices notices={props.notices} comments={props.comments} />
+            <RenderNotices notices={props.notices} comments={props.comments.comments} />
         
         </div>
     );
