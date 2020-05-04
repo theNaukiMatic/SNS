@@ -22,12 +22,11 @@ export const postSignup = (username, password, firstname, lastname, email, dateo
         body: JSON.stringify(newSignup),
         headers: {
             'Content-Type': 'application/json',
-            'Origin':'https://localhost:3443'
             // 'Authorization': bearer
         },
         credentials: 'same-origin'
     })
-    .then(response => {
+    .then((response) => {
         if (response.ok) {
             return response;
         }
@@ -42,7 +41,8 @@ export const postSignup = (username, password, firstname, lastname, email, dateo
         throw errmess;
     })
     .then(response => response.json())
-    // .then(response => dispatch(addUsers(response)))
+    .then(response => {console.log('post signup successfull' + response);
+                        alert("signup was successfull");})
     .catch(error => { console.log('Post Signup ', error.message);
         alert('Sign up was unsuccessfull \nError: '+ error.message); })
 }
@@ -177,8 +177,14 @@ export const addUsers = (users) => ({
 export const fetchGroups = () => (dispatch) => {
 
     dispatch(usersLoading());
+    const bearer = 'Bearer ' + localStorage.getItem('token');
 
-    return fetch(baseUrl + 'groups')
+    return fetch(baseUrl + 'groups',{
+        headers: {
+            'Authorization': bearer
+        },
+    })
+    
         .then(response => {
             if (response.ok) {
             return response;
@@ -216,8 +222,13 @@ export const addGroups = (groups) => ({
 export const fetchComments = () => (dispatch) => {
 
     dispatch(commentsLoading());
+    const bearer = 'Bearer ' + localStorage.getItem('token');
 
-    return fetch(baseUrl + 'comments')
+    return fetch(baseUrl + 'comments',{
+        headers: {
+            'Authorization': bearer
+        },
+    })
         .then(response => {
             if (response.ok) {
             return response;
@@ -253,10 +264,15 @@ export const addComments = (comments) => ({
 //for downloading notices
 
 export const fetchNotices = () => (dispatch) => {
+    const bearer = 'Bearer ' + localStorage.getItem('token');
 
     dispatch(noticesLoading());
 
-    return fetch(baseUrl + 'noticeBoard')
+    return fetch(baseUrl + 'noticeBoard',{
+        headers: {
+            'Authorization': bearer
+        },
+    })
         .then(response => {
             if (response.ok) {
             return response;

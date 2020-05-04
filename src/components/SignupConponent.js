@@ -15,7 +15,7 @@ class Signup extends Component{
     }
 
     handleSubmit(values) {
-        this.props.postSignup(values.username, values.password,values.firstname, values.lastname, values.email, values.dateofbirth, values.bio);
+        this.props.postSignup(values.username, values.password,values.firstname, values.lastname, values.email, values.dateofbirth, values.bio, values.AAA, values.teacher);
     } 
     render(){
         return(
@@ -92,6 +92,28 @@ class Signup extends Component{
                                     className="form-control" />
                             </Col>
                         </Row>
+                        <Row className="form-group">
+                                <Col md={{size: 6, offset: 2}}>
+                                    <div className="form-check">
+                                        <Label check>
+                                            <Control.checkbox model=".AAA" name="AAA"
+                                                className="form-check-input"
+                                                 /> {' '}
+                                                <strong>AAA</strong>
+                                        </Label>
+                                    </div>
+                                </Col>
+                                <Col md={{size: 6, offset: 2}}>
+                                    <div className="form-check">
+                                        <Label check>
+                                            <Control.checkbox model=".teacher" name="teacher"
+                                                className="form-check-input"
+                                                 /> {' '}
+                                                <strong>Teacher</strong>
+                                        </Label>
+                                    </div>
+                                </Col>
+                            </Row>
                         <Row className="form-group">
                             <Col md={{size:10, offset: 2}}>
                                 <Button type="submit" color="primary">

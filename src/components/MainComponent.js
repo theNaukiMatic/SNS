@@ -28,7 +28,7 @@ const mapStateToProps = state => {
     }
 }
 const mapDispatchToProps = dispatch => ({
-    postSignup: (username, password,firstname, lastname, email, dateofbirth, bio) => dispatch(postSignup(username, password, firstname, lastname, email, dateofbirth, bio)),
+    postSignup: (username, password,firstname, lastname, email, dateofbirth, bio, AAA, teacher) => dispatch(postSignup(username, password, firstname, lastname, email, dateofbirth, bio,AAA, teacher)),
   
     fetchUsers: () =>{dispatch(fetchUsers())},
     fetchGroups: () =>{dispatch(fetchGroups())},
