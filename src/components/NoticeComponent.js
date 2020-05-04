@@ -117,9 +117,14 @@ function RenderNotices({notices,comments}){
                         /> */}
                         <hr></hr>
                         <div className="row">
-                            <div className="col-6">
-                                <p>by: {<AuthorDetail author={notice.author} />}
-                                on {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(notice.dateofpost)))}</p>
+                        <div className="col-1 " >
+                                <p>by: </p>
+                            </div>
+                            <div className="col-2" >
+                                <p>{<AuthorDetail author={notice.author} />}</p>
+                            </div>
+                            <div className="col-3">
+                            <p>on {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(notice.dateofpost)))}</p>
                             </div>
                         </div>
                         <RenderComments comments={comments.filter((coms) => coms.notice === notice._id)}/>

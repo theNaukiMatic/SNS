@@ -12,6 +12,8 @@ import GroupDetail from './GroupDetailComponent';
 import GroupMembers from './GroupMembers';
 //
 
+import { fetchUsers} from '../redux/ActionCreators';
+
 import { Switch, Route, Redirect , withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -27,20 +29,20 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => ({
   
-  
+    fetchUsers: () =>{dispatch(fetchUsers())}
 });
 
 
 class Main extends Component{
     constructor(props){
         super(props);
-        console.log("Users:  "+ this.props.users);
-        console.log("comments:  "+ this.props.comments);
-        console.log("groups:" + this.props.groups)
         this.state = {
             
         }
     }
+    componentDidMount() {
+        this.props.fetchUsers();
+      }
     
     render(){
 
@@ -53,13 +55,6 @@ class Main extends Component{
               />
               );
           };
-        //   const GroupMem = ({match}) => {
-
-        //     return(
-        //       <GroupDetail  group={this.props.groups.filter((group) => group._id === match.params.groupId)[0]}
-        //       />
-        //       );
-        //   };
 
         return(
             <div>
@@ -71,7 +66,6 @@ class Main extends Component{
                         <Route exact path="/profile" component={() => <Profile users={this.props.users}/>} />
                         <Route exact path="/notice_board" component={() => <Notice notices={this.props.notices} comments={this.props.comments} />} />
                         <Route exact path='/groups' component={() => <Groups groups={this.props.groups}/>} />
-                        {/* <Route path='/groups/:groupId/members' component={GroupMem} /> */}
                         <Route path='/groups/:groupId' component={GroupwithId} />
                         
                         <Redirect to="/home" />

@@ -4,6 +4,9 @@ import {Card, CardImg ,CardBody,  Breadcrumb, BreadcrumbItem, Button, Row, Col, 
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import {Link} from 'react-router-dom';
 
+import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
+
 
 function RenderProfile({user}){
     return(
@@ -43,7 +46,7 @@ function RenderProfile({user}){
                             </div>
                         </CardBody>
                     </Card>
-                </div>                
+                </div>
             </div>
         </div>
     );
@@ -114,49 +117,71 @@ class ProfileForm extends Component{
                         </LocalForm>
                     </div>
                 </div>
-                
-                
+
+
             </div>
         );
     }
-    
+
 }
 
 function Profile(props){
-    return(
-        <div className="container">
-            <div className="row">
-                <Breadcrumb>
-                    <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
-                    <BreadcrumbItem active>Your Profile</BreadcrumbItem>
-                </Breadcrumb>
+    if (props.users.isLoading) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <Loading />
+                </div>
             </div>
-            
-            <RenderProfile user={props.users.filter((user) => user._id === "5eac095b9b7ef840902b93fb")[0]} />
+        );
+    }
+    else if (props.users.errMess) {
+        return(
+            <div className="container">
+                <div className="row"> 
+                    <div className="col-12">
+                        <h4>{props.users.errMess}</h4>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+    else
+        return(
+            <div className="container">
+                <div className="row">
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>Your Profile</BreadcrumbItem>
+                    </Breadcrumb>
+                </div>
 
-            <LocalForm className="mt-5">
-                <Row className="form-group">
-                    <Label htmlFor="firstname" md={2}>Search other Users</Label>
-                    <Col md={6}>
-                        <Control.text model=".search" id="search" name="search"
-                            placeholder="enter username"
-                            className="form-control"
-                        />
-                    </Col>
-                </Row>
-                <Row className="form-group">
-                    <Col md={{size:10, offset: 2}}>
-                        <Button type="submit" color="primary">
-                        Search
-                        </Button>
-                    </Col>
-                </Row>
-            </LocalForm>
-            
-            <ProfileForm />
+                <RenderProfile user={props.users.users.filter((user) => user._id === "5eac095b9b7ef840902b93fb")[0]} />
 
-            
-        </div>
-    );
+                <LocalForm className="mt-5">
+                    <Row className="form-group">
+                        <Label htmlFor="firstname" md={{size:2, offset: 2}}>Search other Users</Label>
+                        <Col md={6}>
+                            <Control.text model=".search" id="search" name="search"
+                                placeholder="enter username"
+                                className="form-control"
+                            />
+                        </Col>
+                        <Col md={{size:2}}>
+                            <Button type="submit" color="primary">
+                            Search
+                            </Button>
+                        </Col>
+                    </Row>
+                    <Row className="form-group">
+
+                    </Row>
+                </LocalForm>
+
+                <ProfileForm />
+
+
+            </div>
+        );
 }
 export default Profile;
