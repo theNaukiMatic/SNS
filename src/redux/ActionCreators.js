@@ -2,7 +2,6 @@ import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
 //signup
-
 export const postSignup = (firstname, lastname, email, dateofbirth, bio) => (dispatch) => {
 
     const newSignup = {
@@ -16,7 +15,7 @@ export const postSignup = (firstname, lastname, email, dateofbirth, bio) => (dis
 
     // const bearer = 'Bearer ' + localStorage.getItem('token');
 
-    return fetch(baseUrl + 'signup', {
+    return fetch(baseUrl + 'users/signup', {
         method: 'POST',
         body: JSON.stringify(newSignup),
         headers: {
