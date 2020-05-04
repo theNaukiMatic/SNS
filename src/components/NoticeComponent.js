@@ -3,6 +3,7 @@ import {Card, CardImg ,CardBody,CardTitle,  Breadcrumb, BreadcrumbItem, Button, 
 import {Link} from 'react-router-dom';
 import FileViewer from 'react-file-viewer';
 import { CustomErrorComponent } from 'custom-error';
+import { Control, LocalForm, Errors } from 'react-redux-form';
 
 class AuthorDetail extends Component{
     constructor(props){
@@ -79,6 +80,21 @@ function RenderComments({comments}){
                 </div>
             </div>
             {com}
+            <LocalForm className="">
+                <Row className="form-group">
+                    <Col md={{size:6, offset: 1}}>
+                        <Control.text model=".newcom" id="newcom" name="newcom"
+                            placeholder="comment"
+                            className="form-control"
+                        />
+                    </Col>
+                    <Col md={{size:4}}>
+                        <Button type="submit" color="primary">
+                        Add Comment
+                        </Button>
+                    </Col>
+                </Row>
+            </LocalForm>
         </div>
     );
 }
