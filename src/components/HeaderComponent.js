@@ -121,7 +121,7 @@ class Header extends Component{
                                 </FormGroup>
                                 <Button type="submit" value="submit">Login</Button>
                             </Form>
-                            <Link to='/signup' onClick={this.toggleModal}>New User ?</Link>
+                            <Link to='/signup' onClick={this.toggleModal}>New User?</Link>
                     </ModalBody>
                 </Modal>
                 {/* Login Modal ends */}

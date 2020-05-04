@@ -4,6 +4,19 @@ import {Link} from 'react-router-dom';
 import { Control, LocalForm} from 'react-redux-form';
 
 class Signup extends Component{
+
+    constructor(props) {
+        super(props);
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        
+        this.state = {
+        };
+    }
+
+    handleSubmit(values) {
+        this.props.postSignup(values.firstname, values.lastname, values.email, values.dateofbirth, values.bio);
+    } 
     render(){
         return(
             <div className="container">
@@ -17,7 +30,7 @@ class Signup extends Component{
                     <h2>Create a new Account !</h2>
                 </div>
                 <hr></hr>
-                    <LocalForm>
+                    <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
                         <Row className="form-group">
                             <Label htmlFor="firstname" md={2}>First Name</Label>
                             <Col md={10}>

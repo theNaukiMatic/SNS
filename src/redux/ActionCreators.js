@@ -1,7 +1,50 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
+//signup
 
+export const postSignup = (firstname, lastname, email, dateofbirth, bio) => (dispatch) => {
+
+    const newSignup = {
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        dateofbirth: dateofbirth,
+        bio: bio
+    }
+    console.log('Sign Up detail ', newSignup);
+
+    // const bearer = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'signup', {
+        method: 'POST',
+        body: JSON.stringify(newSignup),
+        headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': bearer
+        },
+        credentials: 'same-origin'
+    })
+    .then(response => {
+        if (response.ok) {
+            return response;
+        }
+        else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    },
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+    })
+    .then(response => response.json())
+    // .then(response => dispatch(addUsers(response)))
+    .catch(error => { console.log('Post Signup ', error.message);
+        alert('Sign up was unsuccessfull \nError: '+ error.message); })
+}
+/////////////////////////////////////////////////////////////////////////
 
 //authentication process
 export const requestLogin = (creds) => {

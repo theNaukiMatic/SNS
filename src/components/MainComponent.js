@@ -11,7 +11,7 @@ import Groups from './GroupsComponent';
 import GroupDetail from './GroupDetailComponent';
 //
 
-import { fetchUsers,fetchGroups,fetchComments,fetchNotices,fetchGroupchat,loginUser, logoutUser} from '../redux/ActionCreators';
+import { postSignup, fetchUsers,fetchGroups,fetchComments,fetchNotices,fetchGroupchat,loginUser, logoutUser} from '../redux/ActionCreators';
 
 import { Switch, Route, Redirect , withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -28,6 +28,7 @@ const mapStateToProps = state => {
     }
 }
 const mapDispatchToProps = dispatch => ({
+    postSignup: (firstname, lastname, email, dateofbirth, bio) => dispatch(postSignup(firstname, lastname, email, dateofbirth, bio)),
   
     fetchUsers: () =>{dispatch(fetchUsers())},
     fetchGroups: () =>{dispatch(fetchGroups())},
@@ -91,8 +92,8 @@ class Main extends Component{
                 <div>
                     <Switch>
                         <Route path='/home' component={() => <Home />} />
-                        <Route exact path='/signup' component={() => <Signup />} />
-                        <Route exact path="/profile" component={() => <Profile users={this.props.users}/>} />
+                        <Route exact path='/signup' component={() => <Signup postSignup={this.props.postSignup}/>} />
+                        <PrivateRoute exact path="/profile" component={() => <Profile users={this.props.users}/>} />
                         <PrivateRoute exact path="/notice_board" component={() => <Notice notices={this.props.notices} comments={this.props.comments} />} />
                         <PrivateRoute exact path='/groups' component={() => <Groups groups={this.props.groups}/>} />
                         <PrivateRoute path='/groups/:groupId' component={GroupwithId} />
