@@ -15,7 +15,7 @@ class Signup extends Component{
     }
 
     handleSubmit(values) {
-        this.props.postSignup(values.firstname, values.lastname, values.email, values.dateofbirth, values.bio);
+        this.props.postSignup(values.username, values.password,values.firstname, values.lastname, values.email, values.dateofbirth, values.bio);
     } 
     render(){
         return(
@@ -31,6 +31,15 @@ class Signup extends Component{
                 </div>
                 <hr></hr>
                     <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                    <Row className="form-group">
+                            <Label htmlFor="username" md={2}>Username</Label>
+                            <Col md={10}>
+                                <Control.text model=".username" id="usrname" name="username"
+                                    placeholder="Username"
+                                    className="form-control"
+                                        />
+                            </Col>
+                        </Row>
                         <Row className="form-group">
                             <Label htmlFor="firstname" md={2}>First Name</Label>
                             <Col md={10}>

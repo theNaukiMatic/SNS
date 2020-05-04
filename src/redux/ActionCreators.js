@@ -2,9 +2,11 @@ import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
 //signup
-export const postSignup = (firstname, lastname, email, dateofbirth, bio) => (dispatch) => {
+export const postSignup = (username, password, firstname, lastname, email, dateofbirth, bio) => (dispatch) => {
 
     const newSignup = {
+        username: username,
+        password: password,
         firstname: firstname,
         lastname: lastname,
         email: email,
@@ -20,6 +22,7 @@ export const postSignup = (firstname, lastname, email, dateofbirth, bio) => (dis
         body: JSON.stringify(newSignup),
         headers: {
             'Content-Type': 'application/json',
+            'Origin':'https://localhost:3443'
             // 'Authorization': bearer
         },
         credentials: 'same-origin'
