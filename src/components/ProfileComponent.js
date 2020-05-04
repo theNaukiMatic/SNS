@@ -38,6 +38,11 @@ function RenderProfile({user}){
                             </div>
                             <hr></hr>
                             <div className="row">
+                                <div className="col-12 col-md-4"><h4>Email:</h4></div>
+                                <div className="col-12 col-md-8"><h4>{user.email} </h4></div>
+                            </div>
+                            <hr></hr>
+                            <div className="row">
                                 <div className="col-12 col-md-4"><h4>Date of Birth:</h4></div>
                                 <div className="col-12 col-md-8"><h4>{user.dateofbirth} </h4></div>
                             </div>
@@ -61,12 +66,16 @@ class ProfileForm extends Component{
              pictures: [] 
             };
          this.onDrop = this.onDrop.bind(this);
+         this.handleSubmit = this.handleSubmit.bind(this);
     }
     onDrop(picture) {
         this.setState({
             pictures: this.state.pictures.concat(picture),
         });
     }
+    handleSubmit(values) {
+        this.props.updateProfile(values.firstname, values.lastname, values.email, values.dateofbirth, values.bio);
+    } 
 
     render(){
         return(
@@ -86,7 +95,7 @@ class ProfileForm extends Component{
                 />
                 <div className="row">
                     <div className="col-12 col-md-8">
-                        <LocalForm>
+                        <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
                             <Row className="form-group">
                                 <Label htmlFor="firstname" md={2}>First Name</Label>
                                 <Col md={10}>
@@ -202,7 +211,7 @@ function Profile(props){
                     </Row>
                 </LocalForm>
 
-                <ProfileForm />
+                <ProfileForm updateProfile={props.updateProfile}/>
 
 
             </div>

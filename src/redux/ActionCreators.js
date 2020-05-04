@@ -352,3 +352,49 @@ export const addGroupchat = (groupchat) => ({
     payload: groupchat
 });
 ///////////////////////////////////////////////
+
+
+//update profile
+export const updateProfile = (firstname, lastname, email, dateofbirth, bio) => (dispatch) => {
+
+    const newProfile = {
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        dateofbirth: dateofbirth,
+        bio: bio,
+    }
+    console.log('update profile :', newProfile);
+
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'users/updateProfile ', {
+        method: 'PUT',
+        body: JSON.stringify(newProfile),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        },
+        credentials: 'same-origin'
+    })
+    .then((response) => {
+        if (response.ok) {
+            return response;
+        }
+        else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    },
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+    })
+    .then(response => response.json())
+    .then(response => {console.log('update profile successfull' + response);
+                        dispatch(fetchUsers())})
+    .catch(error => { console.log('update profile', error.message);
+        alert('could not update profile \nError: '+ error.message); })
+}
+/////////////////////////////////////////////////////////////////////////
