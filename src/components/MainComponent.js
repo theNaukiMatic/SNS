@@ -9,6 +9,7 @@ import Notice from './NoticeComponent';
 import Signup from './SignupConponent';
 import Groups from './GroupsComponent';
 import GroupDetail from './GroupDetailComponent';
+import GroupMembers from './GroupMembers';
 //
 
 import { Switch, Route, Redirect , withRouter} from 'react-router-dom';
@@ -52,6 +53,13 @@ class Main extends Component{
               />
               );
           };
+        //   const GroupMem = ({match}) => {
+
+        //     return(
+        //       <GroupDetail  group={this.props.groups.filter((group) => group._id === match.params.groupId)[0]}
+        //       />
+        //       );
+        //   };
 
         return(
             <div>
@@ -63,7 +71,9 @@ class Main extends Component{
                         <Route exact path="/profile" component={() => <Profile users={this.props.users}/>} />
                         <Route exact path="/notice_board" component={() => <Notice notices={this.props.notices} comments={this.props.comments} />} />
                         <Route exact path='/groups' component={() => <Groups groups={this.props.groups}/>} />
+                        {/* <Route path='/groups/:groupId/members' component={GroupMem} /> */}
                         <Route path='/groups/:groupId' component={GroupwithId} />
+                        
                         <Redirect to="/home" />
                     </Switch>
                 </div>

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Card, CardImg ,CardBody,  Breadcrumb, BreadcrumbItem, Button, Row, Col, Label} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
+import GroupMembers from './GroupMembers';
 
 class Messages extends Component{
     constructor(props){
@@ -74,7 +75,11 @@ class GroupDetail extends Component{
                     <h1><span className="fa fa-users"></span> {this.props.group.name}</h1>
                 </div>
                 <div className="row">
-                    <p>{this.props.group.description}</p>
+                    <p>{this.props.group.description} </p>
+                    
+                </div>
+                <div className="row mb-5">
+                    <GroupMembers group={this.props.group}/>
                 </div>
                 <Messages chat={this.props.groupchat}/>
                 <hr></hr>
