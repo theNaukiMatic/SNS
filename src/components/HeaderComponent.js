@@ -48,6 +48,9 @@ class Header extends Component{
                             <NavItem>
                                 <NavLink className="nav-link" to='/profile'><span className="fa fa-user"></span> Your Profile</NavLink>
                             </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to='/groups'><span className="fa fa-users"></span> Groups</NavLink>
+                            </NavItem>
                         </Nav>
                         <Nav className="ml-auto" navbar>
                                 <NavItem>
@@ -93,7 +96,7 @@ class Header extends Component{
                         <div className="row">
                             <div className="col-12 col-sm-6">
                                 <h1>Student Networking System</h1>
-                                <p> blah blah blah blah ... </p>
+                                <p> Sample text(description) ... </p>
                             </div>
                         </div>
                     </div>

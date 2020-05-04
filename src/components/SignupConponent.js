@@ -14,9 +14,9 @@ class Signup extends Component{
                     </Breadcrumb>
                 </div>
                 <div className="row mt-5">
-                    <h2>Signup for Student Networking System</h2>
-                    <hr></hr>
+                    <h2>Create a new Account !</h2>
                 </div>
+                <hr></hr>
                     <LocalForm>
                         <Row className="form-group">
                             <Label htmlFor="firstname" md={2}>First Name</Label>
@@ -24,7 +24,7 @@ class Signup extends Component{
                                 <Control.text model=".firstname" id="firstname" name="firstname"
                                     placeholder="First Name"
                                     className="form-control"
-                                        />
+                                />
                             </Col>
                         </Row>
                         <Row className="form-group">

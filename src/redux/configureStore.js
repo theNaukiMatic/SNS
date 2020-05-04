@@ -4,6 +4,7 @@ import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {Users} from './users';
 import {Notices} from './notice';
 import {Comments} from './comments';
+import {Groups} from './groups';
 
 
 import thunk from 'redux-thunk';
@@ -15,7 +16,8 @@ export const ConfigureStore = () => {
         combineReducers({
             users: Users,
             notices: Notices,
-            comments: Comments
+            comments: Comments,
+            groups: Groups
         }),
         applyMiddleware(thunk, logger)
     );

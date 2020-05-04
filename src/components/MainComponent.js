@@ -1,10 +1,5 @@
 import React, {Component} from 'react';
 
-//remove later after connecting to redux
-import {NOTICECOM} from '../shared/noticeComments';
-import {NOTICE} from '../shared/notice';
-//
-
 //imorting my components
 import Header from './HeaderComponent';
 import Home from './HomeComponent';
@@ -12,6 +7,8 @@ import Footer from './FooterComponent';
 import Profile from './ProfileComponent';
 import Notice from './NoticeComponent';
 import Signup from './SignupConponent';
+import Groups from './GroupsComponent';
+import GroupDetail from './GroupDetailComponent';
 //
 
 import { Switch, Route, Redirect , withRouter} from 'react-router-dom';
@@ -22,7 +19,8 @@ const mapStateToProps = state => {
     return {
         users: state.users,
         comments: state.comments,
-        notices: state.notices
+        notices: state.notices,
+        groups:state.groups
     }
 }
 const mapDispatchToProps = dispatch => ({
@@ -36,23 +34,34 @@ class Main extends Component{
         super(props);
         console.log("Users:  "+ this.props.users);
         console.log("comments:  "+ this.props.comments);
+        console.log("groups:" + this.props.groups)
         this.state = {
-            // users:USERS,
-            notices:NOTICE,
-            comments:NOTICECOM
+            
         }
     }
     
     render(){
+
+
+        const GroupwithId = ({match}) => {
+
+            return(
+              <GroupDetail group={this.props.groups.filter((group) => group._id === parseInt(match.params.groupId,10))[0]}
+              />
+              );
+          };
+
         return(
             <div>
                 <Header />
                 <div>
                     <Switch>
                         <Route path='/home' component={() => <Home />} />
-                        <Route path='/signup' component={() => <Signup />} />
-                        <Route path="/profile" component={() => <Profile users={this.props.users}/>} />
-                        <Route path="/notice_board" component={() => <Notice notices={this.props.notices} comments={this.props.comments} />} />
+                        <Route exact path='/signup' component={() => <Signup />} />
+                        <Route exact path="/profile" component={() => <Profile users={this.props.users}/>} />
+                        <Route exact path="/notice_board" component={() => <Notice notices={this.props.notices} comments={this.props.comments} />} />
+                        <Route exact path='/groups' component={() => <Groups groups={this.props.groups}/>} />
+                        <Route path='/groups/:groupId' component={GroupwithId} />
                         <Redirect to="/home" />
                     </Switch>
                 </div>

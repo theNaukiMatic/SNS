@@ -1,6 +1,6 @@
 export const NOTICE = [
     {
-        "message": "aefgrgagrargrgrgr",
+        "message": "sample message",
         "title": "this is a notice",
         "author": {
             "firstname": "Ishan",
@@ -23,7 +23,7 @@ export const NOTICE = [
         "__v": 0
     },
     {
-        "message": "aefgrgagrargrgrgr",
+        "message": "this is a sample notice messaage",
         "title": "this is another notice",
         "author": {
             "firstname": "Naukesh",

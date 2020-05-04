@@ -133,8 +133,29 @@ function Profile(props){
             </div>
             
             <RenderProfile user={props.users.filter((user) => user._id === "5eac095b9b7ef840902b93fb")[0]} />
+
+            <LocalForm className="mt-5">
+                <Row className="form-group">
+                    <Label htmlFor="firstname" md={2}>Search other Users</Label>
+                    <Col md={6}>
+                        <Control.text model=".search" id="search" name="search"
+                            placeholder="enter username"
+                            className="form-control"
+                        />
+                    </Col>
+                </Row>
+                <Row className="form-group">
+                    <Col md={{size:10, offset: 2}}>
+                        <Button type="submit" color="primary">
+                        Search
+                        </Button>
+                    </Col>
+                </Row>
+            </LocalForm>
             
             <ProfileForm />
+
+            
         </div>
     );
 }

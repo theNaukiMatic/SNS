@@ -1,7 +1,7 @@
 export const NOTICECOM = [
     {
         "_id": "5eadfbd62e775d5324adf06f",
-        "comment": "fawefffarfrefrggrrearrgrerg",
+        "comment": "this is a sample comment",
         "notice": "1232124124",
         "author": {
             "firstname": "nauki",
@@ -25,10 +25,10 @@ export const NOTICECOM = [
     },
     {
         "_id": "5eae055d2e775d5324adf070",
-        "comment": "hahahahahah",
+        "comment": "this is another comment",
         "notice": "1232124156",
         "author": {
-            "firstname": "blahman",
+            "firstname": "ishan",
             "lastname": "1999",
             "admin": true,
             "teacher": true,
