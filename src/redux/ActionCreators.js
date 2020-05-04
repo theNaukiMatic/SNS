@@ -2,7 +2,7 @@ import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
 //signup
-export const postSignup = (username, password, firstname, lastname, email, dateofbirth, bio) => (dispatch) => {
+export const postSignup = (username, password, firstname, lastname, email, dateofbirth, bio,AAA,teacher) => (dispatch) => {
 
     const newSignup = {
         username: username,
@@ -11,7 +11,9 @@ export const postSignup = (username, password, firstname, lastname, email, dateo
         lastname: lastname,
         email: email,
         dateofbirth: dateofbirth,
-        bio: bio
+        bio: bio,
+        AAA:AAA,
+        teacher:teacher
     }
     console.log('Sign Up detail ', newSignup);
 
