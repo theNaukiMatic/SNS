@@ -20,7 +20,8 @@ const mapStateToProps = state => {
         users: state.users,
         comments: state.comments,
         notices: state.notices,
-        groups:state.groups
+        groups:state.groups,
+        groupchat: state.groupchat
     }
 }
 const mapDispatchToProps = dispatch => ({
@@ -46,7 +47,8 @@ class Main extends Component{
         const GroupwithId = ({match}) => {
 
             return(
-              <GroupDetail group={this.props.groups.filter((group) => group._id === parseInt(match.params.groupId,10))[0]}
+              <GroupDetail  group={this.props.groups.filter((group) => group._id === match.params.groupId)[0]}
+                            groupchat={this.props.groupchat.filter((chat) => chat.group === match.params.groupId)}
               />
               );
           };

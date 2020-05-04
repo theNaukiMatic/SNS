@@ -40,8 +40,8 @@ class Groups extends Component{
                         <BreadcrumbItem active>Groups</BreadcrumbItem>
                     </Breadcrumb>
                 </div>
-                <div className="row">
-                    <h1>Groups</h1>
+                <div className="row mb-5 mt-3">
+                    <h1><span className="fa fa-users"></span> Groups</h1>
                 </div>
                 <RenderGroups groups={this.props.groups} />
                 

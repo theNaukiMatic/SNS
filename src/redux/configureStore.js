@@ -5,6 +5,7 @@ import {Users} from './users';
 import {Notices} from './notice';
 import {Comments} from './comments';
 import {Groups} from './groups';
+import {GroupChat} from './groupchat';
 
 
 import thunk from 'redux-thunk';
@@ -17,7 +18,8 @@ export const ConfigureStore = () => {
             users: Users,
             notices: Notices,
             comments: Comments,
-            groups: Groups
+            groups: Groups,
+            groupchat: GroupChat
         }),
         applyMiddleware(thunk, logger)
     );
