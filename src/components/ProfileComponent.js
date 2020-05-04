@@ -4,6 +4,8 @@ import {Card, CardImg ,CardBody,  Breadcrumb, BreadcrumbItem, Button, Row, Col, 
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import {Link} from 'react-router-dom';
 
+import ImageUploader from 'react-images-upload';
+
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
 
@@ -52,6 +54,20 @@ function RenderProfile({user}){
     );
 }
 class ProfileForm extends Component{
+
+    constructor(props) {
+        super(props);
+         this.state = { 
+             pictures: [] 
+            };
+         this.onDrop = this.onDrop.bind(this);
+    }
+    onDrop(picture) {
+        this.setState({
+            pictures: this.state.pictures.concat(picture),
+        });
+    }
+
     render(){
         return(
             <div>
@@ -61,6 +77,13 @@ class ProfileForm extends Component{
                         <h1>Update your profile</h1>
                     </div>
                 </div>
+                <ImageUploader
+                    withIcon={true}
+                    buttonText='Upload Profile Picture'
+                    onChange={this.onDrop}
+                    imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                    maxFileSize={5242880}
+                />
                 <div className="row">
                     <div className="col-12 col-md-8">
                         <LocalForm>

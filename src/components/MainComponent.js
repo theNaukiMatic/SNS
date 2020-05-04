@@ -92,7 +92,7 @@ class Main extends Component{
                     <Switch>
                         <Route path='/home' component={() => <Home />} />
                         <Route exact path='/signup' component={() => <Signup />} />
-                        <PrivateRoute exact path="/profile" component={() => <Profile users={this.props.users}/>} />
+                        <Route exact path="/profile" component={() => <Profile users={this.props.users}/>} />
                         <PrivateRoute exact path="/notice_board" component={() => <Notice notices={this.props.notices} comments={this.props.comments} />} />
                         <PrivateRoute exact path='/groups' component={() => <Groups groups={this.props.groups}/>} />
                         <PrivateRoute path='/groups/:groupId' component={GroupwithId} />
