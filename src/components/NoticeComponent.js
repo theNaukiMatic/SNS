@@ -57,9 +57,9 @@ class AuthorDetail extends Component{
     }
 }
 
-function onError(e){
-    console.log("error in file viewer");
-  }
+// function onError(e){
+//     console.log("error in file viewer");
+//   }
 function RenderComments({comments}){
     const com = comments.map((comment) => {
         return(
@@ -149,7 +149,7 @@ function RenderNotices({notices,comments}){
 
 
 function Notice(props){
-    if (props.comments.isLoading) {
+    if (props.comments.isLoading ) {
         return(
             <div className="container">
                 <div className="row">            
@@ -169,6 +169,26 @@ function Notice(props){
             </div>
         );
     }
+    else if (props.notices.isLoading) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (props.notices.errMess) {
+        return(
+            <div className="container">
+                <div className="row"> 
+                    <div className="col-12">
+                        <h4>{props.noitces.errMess}</h4>
+                    </div>
+                </div>
+            </div>
+        );
+    }
     else
     return(
         <div className="container">
@@ -183,7 +203,7 @@ function Notice(props){
                     <h1><span className="fa fa-envelope"></span>   Notice Board</h1>
                 </div>
             </div>
-            <RenderNotices notices={props.notices} comments={props.comments.comments} />
+            <RenderNotices notices={props.notices.notices} comments={props.comments.comments} />
         
         </div>
     );

@@ -11,7 +11,7 @@ import Groups from './GroupsComponent';
 import GroupDetail from './GroupDetailComponent';
 //
 
-import { fetchUsers,fetchGroups,fetchComments} from '../redux/ActionCreators';
+import { fetchUsers,fetchGroups,fetchComments,fetchNotices} from '../redux/ActionCreators';
 
 import { Switch, Route, Redirect , withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -30,7 +30,8 @@ const mapDispatchToProps = dispatch => ({
   
     fetchUsers: () =>{dispatch(fetchUsers())},
     fetchGroups: () =>{dispatch(fetchGroups())},
-    fetchComments: () =>{dispatch(fetchComments())}
+    fetchComments: () =>{dispatch(fetchComments())},
+    fetchNotices: () =>{dispatch(fetchNotices())}
 });
 
 
@@ -45,6 +46,7 @@ class Main extends Component{
         this.props.fetchUsers();
         this.props.fetchGroups();
         this.props.fetchComments();
+        this.props.fetchNotices();
       }
     
     render(){

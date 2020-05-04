@@ -117,3 +117,42 @@ export const addComments = (comments) => ({
     type: ActionTypes.ADD_COMMENTS,
     payload: comments
 });
+
+//for downloading notices
+
+export const fetchNotices = () => (dispatch) => {
+
+    dispatch(noticesLoading());
+
+    return fetch(baseUrl + 'noticeBoard')
+        .then(response => {
+            if (response.ok) {
+            return response;
+            } else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+            }
+        },
+        error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+        })
+        .then (response => response.json())
+        .then (notices => dispatch(addNotices(notices)))
+        .catch(error => dispatch(noticesFailed(error.message)));
+        
+}
+export const noticesLoading = () => ({
+    type: ActionTypes.NOTICES_LOADING
+});
+
+export const noticesFailed = (errmess) => ({
+    type: ActionTypes.NOTICES_FAILED,
+    payload: errmess
+});
+
+export const addNotices = (noitces) => ({
+    type: ActionTypes.ADD_NOTICES,
+    payload: noitces
+});
