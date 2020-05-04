@@ -11,7 +11,7 @@ import Groups from './GroupsComponent';
 import GroupDetail from './GroupDetailComponent';
 //
 
-import { fetchUsers,fetchGroups,fetchComments,fetchNotices,fetchGroupchat} from '../redux/ActionCreators';
+import { fetchUsers,fetchGroups,fetchComments,fetchNotices,fetchGroupchat,loginUser, logoutUser} from '../redux/ActionCreators';
 
 import { Switch, Route, Redirect , withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -23,7 +23,8 @@ const mapStateToProps = state => {
         comments: state.comments,
         notices: state.notices,
         groups:state.groups,
-        groupchat: state.groupchat
+        groupchat: state.groupchat,
+        auth: state.auth
     }
 }
 const mapDispatchToProps = dispatch => ({
@@ -32,7 +33,10 @@ const mapDispatchToProps = dispatch => ({
     fetchGroups: () =>{dispatch(fetchGroups())},
     fetchComments: () =>{dispatch(fetchComments())},
     fetchNotices: () =>{dispatch(fetchNotices())},
-    fetchGroupchat: () =>{dispatch(fetchGroupchat())}
+    fetchGroupchat: () =>{dispatch(fetchGroupchat())},
+    loginUser: (creds) => dispatch(loginUser(creds)),
+    logoutUser: () => dispatch(logoutUser())
+
 });
 
 
@@ -68,9 +72,22 @@ class Main extends Component{
               );
           };
 
+          const PrivateRoute = ({ component: Component, ...rest }) => (
+            <Route {...rest} render={(props) => (
+              this.props.auth.isAuthenticated
+                ? <Component {...props} />
+                : <Redirect to={{
+                    pathname: '/home',
+                    state: { from: props.location }
+                  }} />
+            )} />
+          );
+
         return(
             <div>
-                <Header />
+                <Header auth={this.props.auth} 
+                        loginUser={this.props.loginUser} 
+                        logoutUser={this.props.logoutUser} />
                 <div>
                     <Switch>
                         <Route path='/home' component={() => <Home />} />

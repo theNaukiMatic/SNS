@@ -1,5 +1,6 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 
+import { Auth } from './auth';
 
 import {Users} from './users';
 import {Notices} from './notice';
@@ -19,7 +20,8 @@ export const ConfigureStore = () => {
             notices: Notices,
             comments: Comments,
             groups: Groups,
-            groupchat: GroupChat
+            groupchat: GroupChat,
+            auth: Auth,
         }),
         applyMiddleware(thunk, logger)
     );
