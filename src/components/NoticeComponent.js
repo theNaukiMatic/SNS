@@ -25,7 +25,7 @@ class AuthorDetail extends Component{
     render(){
         return(
             <div>
-                <Button outline onClick={this.toggleModal}><span className="fa fa-user"></span> {this.props.author.firstname} {this.props.author.lastname}</Button>
+                <Button outline onClick={this.toggleModal}><span className="fa fa-user"></span> {this.props.author.username}</Button>
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>{this.props.author.firstname} {this.props.author.lastname}</ModalHeader>
                     <ModalBody>

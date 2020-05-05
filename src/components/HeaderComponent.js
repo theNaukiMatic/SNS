@@ -112,13 +112,7 @@ class Header extends Component{
                                     <Input type="password" id="password" name="password"
                                         innerRef={(input) => this.password = input}  />
                                 </FormGroup>
-                                <FormGroup check>
-                                    <Label check>
-                                        <Input type="checkbox" name="remember"
-                                        innerRef={(input) => this.remember = input}  />
-                                        Remember me
-                                    </Label>
-                                </FormGroup>
+
                                 <Button type="submit" value="submit">Login</Button>
                             </Form>
                             <Link to='/signup' onClick={this.toggleModal}>New User?</Link>
@@ -130,7 +124,7 @@ class Header extends Component{
                         <div className="row">
                             <div className="col-12 col-sm-6">
                                 <h1>Student Networking System</h1>
-                                <p> Sample text(description) ... </p>
+                                <p> An online platform which people use to build social networks focused on students</p>
                             </div>
                         </div>
                     </div>

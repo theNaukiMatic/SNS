@@ -64,7 +64,7 @@ function RenderGroups({groups,me}){
     const gro = me.groups.map((group) => {
         return(
             <div className="row">
-                <div className="col-6"  key={group._id}>
+                <div className="col-12"  key={group._id}>
                     <Link to={`/groups/${group._id}`}>
                         <Card className="col-12">
                             <CardTitle><h3>{group.name}</h3>
@@ -93,7 +93,7 @@ class JoinGroups extends Component{
 
             return(
                 <div className="row">
-                    <div className="col-6"  key={group._id}>
+                    <div className="col-12"  key={group._id}>
                             <Card className="col-12">
                                 <CardTitle><h3>{group.name}</h3>
                                 <p>{group.description}</p>
@@ -152,12 +152,13 @@ class Groups extends Component{
                 </div>
             );
         }
-        
+        // document.write(JSON.stringify(obj1) === JSON.stringify(obj2));
+        // persons.some(person => person.name === "Peter")
         else{
             fetchUsers();       
             const me = this.props.users.filter((user) => user.username === this.props.auth.user.username)[0];
-        console.log(me);
-        // const ha = this.props.groups.groups.filter((group) => me.groups.includes(group) === false);
+        // console.log(me);
+        const ha = this.props.groups.groups.filter((group) => !me.groups.some(x => x._id=== group._id));
 
         return(
             <div className="container">
@@ -207,11 +208,19 @@ class Groups extends Component{
                     </LocalForm>
                 </div>
                 <hr></hr>
-                <JoinGroups groups={this.props.groups.groups} joinGroup={this.props.joinGroup} me={me}/>
-                <div className="row mb-5 mt-3">
-                    <h1><span className="fa fa-users"></span>Your Groups</h1>
+                <div className="row">
+                    <div className="col-6">
+                        <JoinGroups groups={this.props.groups.groups} joinGroup={this.props.joinGroup} me={me}/>
+                    </div>
+                    <div className="col-6">
+                        <div className="row mb-5 mt-3">
+                            <h1><span className="fa fa-users"></span>Your Groups</h1>
+                        </div>
+                        <RenderGroups groups={ha} me={me}/>
+                    </div>
                 </div>
-                <RenderGroups groups={this.props.groups.groups} me={me}/>
+                
+                
                 
             </div>
         );

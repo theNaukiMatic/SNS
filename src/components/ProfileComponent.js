@@ -19,12 +19,12 @@ function RenderProfile({user}){
                 </div>
             </div>
             <div className="row">
-                <div className="col-12 col-md-3 offset-md-1">
+                {/* <div className="col-12 col-md-3 offset-md-1">
                     <Card>
                         <CardImg top src={baseUrl + user.image} alt={user.firstname} />
                     </Card>
-                </div>
-                <div className="col-12 col-md-7">
+                </div> */}
+                <div className="col-12 col-md-7 offset-md-2">
                     <Card>
                         <CardBody>
                             <div className="row">
@@ -65,24 +65,24 @@ class ProfileForm extends Component{
          this.state = { 
              pictures: [] 
             };
-         this.onDrop = this.onDrop.bind(this);
+        //  this.onDrop = this.onDrop.bind(this);
          this.handleSubmit = this.handleSubmit.bind(this);
-         this.handleSubmit2 = this.handleSubmit2.bind(this);
+        //  this.handleSubmit2 = this.handleSubmit2.bind(this);
     }
-    onDrop(picture) {
-        this.setState({
-            pictures: this.state.pictures.concat(picture),
-        });
-        this.props.uploadProfile(picture[0]);
-    }
+    // onDrop(picture) {
+    //     this.setState({
+    //         pictures: this.state.pictures.concat(picture),
+    //     });
+    //     this.props.uploadProfile(picture[0]);
+    // }
     handleSubmit(values) {
         this.props.updateProfile(values.firstname, values.lastname, values.email, values.dateofbirth, values.bio);
         // this.props.uploadProfile(values.photo);
     } 
-    handleSubmit2(values) {
-        // this.props.updateProfile(values.firstname, values.lastname, values.email, values.dateofbirth, values.bio);
-        this.props.uploadProfile(values.photo);
-    } 
+    // handleSubmit2(values) {
+    //     // this.props.updateProfile(values.firstname, values.lastname, values.email, values.dateofbirth, values.bio);
+    //     this.props.uploadProfile(values.photo);
+    // } 
 
 
     render(){
@@ -94,14 +94,14 @@ class ProfileForm extends Component{
                         <h1>Update your profile</h1>
                     </div>
                 </div>
-                <ImageUploader
+                {/* <ImageUploader
                     withIcon={true}
                     buttonText='Upload Profile Picture'
                     onChange={this.onDrop}
                     imgExtension={['.jpg', '.gif', '.png', '.gif']}
                     maxFileSize={5242880}
-                />
-                <LocalForm onSubmit={(values) => this.handleSubmit2(values)}>
+                /> */}
+                {/* <LocalForm onSubmit={(values) => this.handleSubmit2(values)}>
                     <Row className="form-group">
                         <Label htmlFor="photo" md={2}>upload photo</Label>
                         <Col md={10}>
@@ -117,7 +117,7 @@ class ProfileForm extends Component{
                                 </Col>
                             </Row>
                     </Row>
-                </LocalForm>
+                </LocalForm> */}
                 <div className="row">
                     <div className="col-12 col-md-8">
                         <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
@@ -209,9 +209,7 @@ class Search extends Component{
       }
       handleSubmit(values) {
         const find = this.props.users.filter((user) => user.username === values.search)[0];
-        // if(find){
-        //     alert("user not found!")
-        // }
+    
         if(find == null){
             alert("user not found");
         }
@@ -228,7 +226,7 @@ class Search extends Component{
             <LocalForm className="mt-5" onSubmit={(values) => this.handleSubmit(values)}>
                 <Row className="form-group">
                     <Label htmlFor="firstname" md={{size:2, offset: 2}}>Search other Users</Label>
-                    <Col md={6}>
+                    <Col md={4}>
                         <Control.text model=".search" id="search" name="search"
                             placeholder="enter username"
                             className="form-control"

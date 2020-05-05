@@ -600,7 +600,9 @@ export const makeGroup = (name,password,description) => (dispatch) => {
     })
     .then(response => response.json())
     .then(response => {console.log('group made' + response);
-                        dispatch(fetchGroups())})
+                        alert("group made!\nrefresh to see changes");
+                        // dispatch(fetchGroups())
+                    })
     .catch(error => { console.log('makeGroup', error.message);
         alert('group could not be made \nError: '+ error.message); })
 }
@@ -641,8 +643,9 @@ export const joinGroup = (groupId, password) => (dispatch) => {
     })
     .then(response => response.json())
     .then(response => {console.log('Group Joined' + response);
-                        dispatch(fetchUsers());
-                        dispatch(fetchGroups());
+                        // dispatch(fetchUsers());
+                        // dispatch(fetchGroups());
+                        alert("group joined!\nrefresh to see changes");
                     })
     .catch(error => { console.log('joinGroup', error.message);
         alert('group could not be joined \nError: '+ error.message); })
