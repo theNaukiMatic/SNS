@@ -318,8 +318,13 @@ export const addNotices = (noitces) => ({
 export const fetchGroupchat = () => (dispatch) => {
 
     dispatch(groupchatLoading());
+    const bearer = 'Bearer ' + localStorage.getItem('token');
 
-    return fetch(baseUrl + 'groupchats')
+    return fetch(baseUrl + 'groupchats',{
+        headers: {
+            'Authorization': bearer
+        },
+    })
         .then(response => {
             if (response.ok) {
             return response;
@@ -334,7 +339,7 @@ export const fetchGroupchat = () => (dispatch) => {
                 throw errmess;
         })
         .then (response => response.json())
-        .then (groupchat => dispatch(addGroupchat(groupchat)))
+        .then (groupchats => dispatch(addGroupchat(groupchats)))
         .catch(error => dispatch(groupchatFailed(error.message)));
         
 }
@@ -598,5 +603,88 @@ export const makeGroup = (name,password,description) => (dispatch) => {
                         dispatch(fetchGroups())})
     .catch(error => { console.log('makeGroup', error.message);
         alert('group could not be made \nError: '+ error.message); })
+}
+/////////////////////////////////////////////////////////////////////////
+
+//join a group
+export const joinGroup = (groupId, password) => (dispatch) => {
+
+    const Group = {
+        password:password,
+    }
+    console.log('group:', Group);
+
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'groups/addToGroup/' + groupId, {
+        method: 'POST',
+        body: JSON.stringify(Group),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        },
+        credentials: 'same-origin'
+    })
+    .then((response) => {
+        if (response.ok) {
+            return response;
+        }
+        else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    },
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+    })
+    .then(response => response.json())
+    .then(response => {console.log('Group Joined' + response);
+                        dispatch(fetchGroups())})
+    .catch(error => { console.log('joinGroup', error.message);
+        alert('group could not be joined \nError: '+ error.message); })
+}
+/////////////////////////////////////////////////////////////////////////
+
+
+export const postChat = (message,groupId) => (dispatch) => {
+
+    const newChat = {
+        message:message,
+        groupId:groupId
+    }
+    console.log('newChat:', newChat);
+
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'groupchats', {
+        method: 'POST',
+        body: JSON.stringify(newChat),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        },
+        credentials: 'same-origin'
+    })
+    .then((response) => {
+        if (response.ok) {
+            return response;
+        }
+        else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    },
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+    })
+    .then(response => response.json())
+    .then(response => {console.log('messagesent' + response);
+                        dispatch(fetchGroupchat())})
+    .catch(error => { console.log('postChat', error.message);
+        alert('message could not be sent \nError: '+ error.message); })
 }
 /////////////////////////////////////////////////////////////////////////

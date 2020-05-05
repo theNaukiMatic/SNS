@@ -36,15 +36,20 @@ class Messages extends Component{
     }
 }
 class AddMessage extends Component{
-    constructor(props){
+    constructor(props) {
         super(props);
+         this.handleSubmit = this.handleSubmit.bind(this);
     }
+    handleSubmit(values) {
+        this.props.postChat(values.message,this.props.groupId);
+    } 
+
     render(){
         return(
-            <LocalForm className="mt-5">
+            <LocalForm className="mt-5" onSubmit={(values) => this.handleSubmit(values)}>
                 <Row className="form-group">
                     <Col md={{size:10, offset: 0}}>
-                        <Control.text model=".newmessage" id="newmessage" name="newmessage"
+                        <Control.text model=".message" id="message" name="message"
                             placeholder="message"
                             className="form-control"
                         />
@@ -127,7 +132,7 @@ class GroupDetail extends Component{
                 </div>
                 <Messages chat={this.props.groupchat}/>
                 <hr></hr>
-                <AddMessage />
+                <AddMessage groupId={this.props.group._id} postChat={this.props.postChat}/>
             </div>
         );
     }
