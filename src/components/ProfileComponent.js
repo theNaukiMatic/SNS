@@ -189,7 +189,14 @@ class Search extends Component{
         super(props);
         this.state = {
             isModalOpen : false,
-            author:{}
+            author:{
+                firstname:"",
+                lastname:"",
+                username:"",
+                email:"",
+                dateofbirth:"",
+                bio:""
+            }
         };
         this.toggleModal = this.toggleModal.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -202,8 +209,17 @@ class Search extends Component{
       }
       handleSubmit(values) {
         const find = this.props.users.filter((user) => user.username === values.search)[0];
-        this.setState({author:find});
-        this.toggleModal();
+        // if(find){
+        //     alert("user not found!")
+        // }
+        if(find == null){
+            alert("user not found");
+        }
+        else{
+            this.setState( {author:find} );
+            this.toggleModal();
+        }
+            
     } 
     render(){
         
