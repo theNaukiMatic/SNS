@@ -16,15 +16,16 @@ function Footer(props){
                         </ul>
                     </div>
                     <div className="col-7 col-sm-5">
-                        <h5>Developed By:</h5>
+                        <h5>SNS developed By:</h5>
                         <ul className="list-unstyled">
-                            <li>Naukesh Goyal</li>
-                            <li>Ishan Agrawal</li>
-                            <li>Manisha Kumari</li>
-                            <li>Jaya Meena</li>
+                            <li className="text-white">Naukesh Goyal</li>
+                            <li className="text-white">Ishan Agrawal</li>
+                            <li className="text-white">Manisha Kumari</li>
+                            <li className="text-white">Jaya Meena</li>
                         </ul>
                     </div>
-                    {/* <div className="col-12 col-sm-4 align-self-center">
+                    
+                    <div className="col-12 col-sm-4 align-self-center">
                         <div className="text-center">
                             <a className="btn btn-social-icon btn-google" href="http://google.com/+"><i className="fa fa-google-plus"></i></a>
                             <a className="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i className="fa fa-facebook"></i></a>
@@ -33,7 +34,7 @@ function Footer(props){
                             <a className="btn btn-social-icon btn-google" href="http://youtube.com/"><i className="fa fa-youtube"></i></a>
                             <a className="btn btn-social-icon" href="mailto:"><i className="fa fa-envelope-o"></i></a>
                         </div>
-                    </div> */}
+                    </div>
                 </div>
             </div>
         </div>
