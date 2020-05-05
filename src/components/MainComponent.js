@@ -11,7 +11,8 @@ import Groups from './GroupsComponent';
 import GroupDetail from './GroupDetailComponent';
 //
 
-import { postSignup, fetchUsers,fetchGroups,fetchComments,fetchNotices,fetchGroupchat,loginUser, logoutUser,updateProfile,postNotice} from '../redux/ActionCreators';
+import { postSignup, fetchUsers,fetchGroups,fetchComments,fetchNotices,fetchGroupchat,loginUser, logoutUser,
+            updateProfile,postNotice,postComment} from '../redux/ActionCreators';
 
 import { Switch, Route, Redirect , withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -31,6 +32,8 @@ const mapDispatchToProps = dispatch => ({
     postSignup: (username, password,firstname, lastname, email, dateofbirth, bio, AAA, teacher) => dispatch(postSignup(username, password, firstname, lastname, email, dateofbirth, bio,AAA, teacher)),
     updateProfile: (firstname, lastname, email, dateofbirth, bio) => dispatch(updateProfile(firstname, lastname, email, dateofbirth, bio)),
     postNotice:(title, message) => dispatch(postNotice(title, message)),
+    postComment:(comment, notice) => dispatch(postComment(comment, notice)),
+    
 
     fetchUsers: () =>{dispatch(fetchUsers())},
     fetchGroups: () =>{dispatch(fetchGroups())},
@@ -97,7 +100,7 @@ class Main extends Component{
                         <Route path='/home' component={() => <Home />} />
                         <Route exact path='/signup' component={() => <Signup postSignup={this.props.postSignup}/>} />
                         <PrivateRoute exact path="/profile" component={() => <Profile users={this.props.users} auth={this.props.auth} updateProfile={this.props.updateProfile}/>} />
-                        <PrivateRoute exact path="/notice_board" component={() => <Notice notices={this.props.notices} comments={this.props.comments} postNotice={this.props.postNotice}/>} />
+                        <PrivateRoute exact path="/notice_board" component={() => <Notice notices={this.props.notices} comments={this.props.comments} postNotice={this.props.postNotice} postComment={this.props.postComment}/>} />
                         <PrivateRoute exact path='/groups' component={() => <Groups groups={this.props.groups}/>} />
                         <PrivateRoute path='/groups/:groupId' component={GroupwithId} />
                         <Redirect to="/home" />

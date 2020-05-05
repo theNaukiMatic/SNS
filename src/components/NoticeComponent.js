@@ -60,7 +60,36 @@ class AuthorDetail extends Component{
 // function onError(e){
 //     console.log("error in file viewer");
 //   }
-function RenderComments({comments}){
+
+class PostComment extends Component{
+    constructor(props) {
+        super(props);
+         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleSubmit(values) {
+        this.props.postComment(values.newcom, this.props.notice);
+    } 
+    render(){
+        return(
+            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                <Row className="form-group">
+                    <Col md={{size:6, offset: 1}}>
+                        <Control.text model=".newcom" id="newcom" name="newcom"
+                            placeholder="comment"
+                            className="form-control"
+                        />
+                    </Col>
+                    <Col md={{size:4}}>
+                        <Button type="submit" color="primary">
+                        Add Comment
+                        </Button>
+                    </Col>
+                </Row>
+            </LocalForm>
+        );
+    }
+}
+function RenderComments({comments,postComment,notice}){
     const com = comments.map((comment) => {
         return(
                 <div className="row" key={comment._id}>
@@ -83,21 +112,7 @@ function RenderComments({comments}){
                 </div>
             </div>
             {com}
-            <LocalForm className="">
-                <Row className="form-group">
-                    <Col md={{size:6, offset: 1}}>
-                        <Control.text model=".newcom" id="newcom" name="newcom"
-                            placeholder="comment"
-                            className="form-control"
-                        />
-                    </Col>
-                    <Col md={{size:4}}>
-                        <Button type="submit" color="primary">
-                        Add Comment
-                        </Button>
-                    </Col>
-                </Row>
-            </LocalForm>
+            <PostComment postComment={postComment} notice={notice} />
         </div>
     );
 }
@@ -147,7 +162,7 @@ class PostNotice extends Component{
         );
     }
 }
-function RenderNotices({notices,comments}){
+function RenderNotices({notices,comments,postComment}){
     const not = notices.map((notice) =>{
         
 
@@ -176,9 +191,8 @@ function RenderNotices({notices,comments}){
                             <p>on {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(notice.createdAt)))}</p>
                             </div>
                         </div>
-                        <RenderComments comments={comments.filter((coms) => coms.notice === notice._id)}/>
+                        <RenderComments comments={comments.filter((coms) => coms.notice === notice._id)} postComment={postComment} notice={notice._id}/>
 
-                        {/* <RenderComments comments={comments}/> */}
                         
                     </CardBody>
                 </Card>
@@ -252,7 +266,7 @@ function Notice(props){
                     <h1><span className="fa fa-envelope"></span>   Notice Board</h1>
                 </div>
             </div>
-            <RenderNotices notices={props.notices.notices} comments={props.comments.comments} />
+            <RenderNotices notices={props.notices.notices} comments={props.comments.comments} postComment={props.postComment}/>
         
         </div>
     );

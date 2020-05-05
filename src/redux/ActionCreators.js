@@ -231,7 +231,7 @@ export const fetchComments = () => (dispatch) => {
     dispatch(commentsLoading());
     const bearer = 'Bearer ' + localStorage.getItem('token');
 
-    return fetch(baseUrl + 'comments',{
+    return fetch(baseUrl + 'comments/',{
         headers: {
             'Authorization': bearer
         },
@@ -439,5 +439,47 @@ export const postNotice = (title, message) => (dispatch) => {
                         dispatch(fetchNotices())})
     .catch(error => { console.log('post Notice', error.message);
         alert('could not post notice \nError: '+ error.message); })
+}
+/////////////////////////////////////////////////////////////////////////
+
+//post a new comment
+export const postComment = (comment, notice) => (dispatch) => {
+
+    const newComment = {
+        comment:comment,
+        notice:notice
+    }
+    console.log('new Comment :', newComment);
+
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'comments/', {
+        method: 'POST',
+        body: JSON.stringify(newComment),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        },
+        credentials: 'same-origin'
+    })
+    .then((response) => {
+        if (response.ok) {
+            return response;
+        }
+        else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    },
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+    })
+    .then(response => response.json())
+    .then(response => {console.log('comment posted successfully' + response);
+                        dispatch(fetchComments())})
+    .catch(error => { console.log('post Comment', error.message);
+        alert('could not post comment \nError: '+ error.message); })
 }
 /////////////////////////////////////////////////////////////////////////
