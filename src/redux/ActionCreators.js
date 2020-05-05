@@ -483,3 +483,43 @@ export const postComment = (comment, notice) => (dispatch) => {
         alert('could not post comment \nError: '+ error.message); })
 }
 /////////////////////////////////////////////////////////////////////////
+
+//delete a notice
+export const deleteNotice = (noticeId) => (dispatch) => {
+
+    const Notice = {
+        noitceId:noticeId
+    }
+    console.log('delete Notice:', Notice);
+
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'noticeBoard/'+noticeId, {
+        method: 'DELETE',
+        // body: JSON.stringify(Notice),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        },
+        credentials: 'same-origin'
+    })
+    .then((response) => {
+        if (response.ok) {
+            return response;
+        }
+        else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    },
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+    })
+    .then(response => response.json())
+    .then(response => {console.log('notice deleted' + response);
+                        dispatch(fetchNotices())})
+    .catch(error => { console.log('delete notice', error.message);
+        alert('could not delete notice \nError: '+ error.message); })
+}

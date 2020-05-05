@@ -162,7 +162,7 @@ class PostNotice extends Component{
         );
     }
 }
-function RenderNotices({notices,comments,postComment}){
+function RenderNotices({notices,comments,postComment, deleteNotice}){
     const not = notices.map((notice) =>{
         
 
@@ -173,6 +173,7 @@ function RenderNotices({notices,comments,postComment}){
                     <CardBody>
                         <h2>{notice.title}</h2>
                         <h5>{notice.message}</h5>
+                        <Button color="danger" onClick={() => deleteNotice(notice._id)}>Delete</Button>
                         {/* <FileViewer
                             fileType={notice.fileType}
                             filePath={notice.filePath}
@@ -266,7 +267,7 @@ function Notice(props){
                     <h1><span className="fa fa-envelope"></span>   Notice Board</h1>
                 </div>
             </div>
-            <RenderNotices notices={props.notices.notices} comments={props.comments.comments} postComment={props.postComment}/>
+            <RenderNotices notices={props.notices.notices} comments={props.comments.comments} postComment={props.postComment} deleteNotice={props.deleteNotice}/>
         
         </div>
     );
