@@ -552,8 +552,51 @@ export const deleteComment= (commentId) => (dispatch) => {
         throw errmess;
     })
     .then(response => response.json())
-    .then(response => {console.log('notice deleted' + response);
+    .then(response => {console.log('comment deleted' + response);
                         dispatch(fetchComments())})
-    .catch(error => { console.log('delete notice', error.message);
-        alert('could not delete notice \nError: '+ error.message); })
+    .catch(error => { console.log('delete comment', error.message);
+        alert('could not delete comment \nError: '+ error.message); })
 }
+
+//make a new group
+export const makeGroup = (name,password,description) => (dispatch) => {
+
+    const newGroup = {
+        name:name,
+        password:password,
+        description:description
+    }
+    console.log('new Group :', newGroup);
+
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'groups/', {
+        method: 'POST',
+        body: JSON.stringify(newGroup),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        },
+        credentials: 'same-origin'
+    })
+    .then((response) => {
+        if (response.ok) {
+            return response;
+        }
+        else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    },
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+    })
+    .then(response => response.json())
+    .then(response => {console.log('group made' + response);
+                        dispatch(fetchGroups())})
+    .catch(error => { console.log('makeGroup', error.message);
+        alert('group could not be made \nError: '+ error.message); })
+}
+/////////////////////////////////////////////////////////////////////////

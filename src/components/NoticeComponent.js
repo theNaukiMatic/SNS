@@ -146,7 +146,7 @@ class PostNotice extends Component{
                 <Row className="form-group">
                     <Label htmlFor="message" md={2}>Message</Label>
                     <Col md={10}>
-                        <Control.text model=".message" id="message" name="message"
+                        <Control.textarea model=".message" id="message" name="message"
                             placeholder="message"
                             className="form-control"
                                 />

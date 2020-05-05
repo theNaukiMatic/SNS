@@ -12,7 +12,7 @@ import GroupDetail from './GroupDetailComponent';
 //
 
 import { postSignup, fetchUsers,fetchGroups,fetchComments,fetchNotices,fetchGroupchat,loginUser, logoutUser,
-            updateProfile,postNotice,postComment, deleteNotice, deleteComment} from '../redux/ActionCreators';
+            updateProfile,postNotice,postComment, deleteNotice, deleteComment, makeGroup} from '../redux/ActionCreators';
 
 import { Switch, Route, Redirect , withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -35,6 +35,7 @@ const mapDispatchToProps = dispatch => ({
     postComment:(comment, notice) => dispatch(postComment(comment, notice)),
     deleteNotice:(noticeId) => dispatch(deleteNotice(noticeId)),
     deleteComment:(commentId) => dispatch(deleteComment(commentId)),
+    makeGroup:(name,password,description) => dispatch(makeGroup(name,password,description)),
     
 
     fetchUsers: () =>{dispatch(fetchUsers())},
@@ -77,6 +78,8 @@ class Main extends Component{
                             groupchat={this.props.groupchat.groupchat.filter((chat) => chat.group === match.params.groupId)}
                             groupchatIsLoading={this.props.groupchat.isLoading}
                             groupchatErrMess={this.props.groupchat.errMess}
+
+                            
               />
               );
           };
@@ -105,7 +108,7 @@ class Main extends Component{
                         <PrivateRoute exact path="/notice_board" component={() => <Notice notices={this.props.notices} 
                                         comments={this.props.comments} postNotice={this.props.postNotice} postComment={this.props.postComment} 
                                         deleteNotice={this.props.deleteNotice} deleteComment={this.props.deleteComment}/>} />
-                        <PrivateRoute exact path='/groups' component={() => <Groups groups={this.props.groups}/>} />
+                        <PrivateRoute exact path='/groups' component={() => <Groups groups={this.props.groups} makeGroup={this.props.makeGroup}/>} />
                         <PrivateRoute path='/groups/:groupId' component={GroupwithId} />
                         <Redirect to="/home" />
                     </Switch>
