@@ -89,13 +89,16 @@ class PostComment extends Component{
         );
     }
 }
-function RenderComments({comments,postComment,notice}){
+function RenderComments({comments,postComment,notice, deleteComment}){
     const com = comments.map((comment) => {
         return(
                 <div className="row" key={comment._id}>
-                    <div className="col-8 offset-1">
+                    <div className="col-6 offset-1">
                         <p>-- {comment.comment}<strong> by {comment.author.firstname}</strong></p>
                         {/* <p>--by {comment.author.firstname}</p> */}
+                    </div>
+                    <div className="col-2">
+                        <Button color="danger" onClick={() => deleteComment(comment._id)}>Delete</Button>
                     </div>
                 </div>
         );
@@ -162,7 +165,7 @@ class PostNotice extends Component{
         );
     }
 }
-function RenderNotices({notices,comments,postComment, deleteNotice}){
+function RenderNotices({notices,comments,postComment, deleteNotice, deleteComment}){
     const not = notices.map((notice) =>{
         
 
@@ -192,7 +195,8 @@ function RenderNotices({notices,comments,postComment, deleteNotice}){
                             <p>on {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(notice.createdAt)))}</p>
                             </div>
                         </div>
-                        <RenderComments comments={comments.filter((coms) => coms.notice === notice._id)} postComment={postComment} notice={notice._id}/>
+                        <RenderComments comments={comments.filter((coms) => coms.notice === notice._id)}
+                                             postComment={postComment} notice={notice._id} deleteComment={deleteComment}/>
 
                         
                     </CardBody>
@@ -267,7 +271,8 @@ function Notice(props){
                     <h1><span className="fa fa-envelope"></span>   Notice Board</h1>
                 </div>
             </div>
-            <RenderNotices notices={props.notices.notices} comments={props.comments.comments} postComment={props.postComment} deleteNotice={props.deleteNotice}/>
+            <RenderNotices notices={props.notices.notices} comments={props.comments.comments} postComment={props.postComment}
+                             deleteNotice={props.deleteNotice} deleteComment={props.deleteComment}/>
         
         </div>
     );
