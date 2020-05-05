@@ -12,7 +12,8 @@ import GroupDetail from './GroupDetailComponent';
 //
 
 import { postSignup, fetchUsers,fetchGroups,fetchComments,fetchNotices,fetchGroupchat,loginUser, logoutUser,
-            updateProfile,postNotice,postComment, deleteNotice, deleteComment, makeGroup, joinGroup, postChat} from '../redux/ActionCreators';
+            updateProfile,postNotice,postComment, deleteNotice, deleteComment, makeGroup, joinGroup, postChat,
+            uploadProfile } from '../redux/ActionCreators';
 
 import { Switch, Route, Redirect , withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -38,6 +39,7 @@ const mapDispatchToProps = dispatch => ({
     makeGroup:(name,password,description) => dispatch(makeGroup(name,password,description)),
     joinGroup:(groupId, password) => dispatch(joinGroup(groupId, password)),
     postChat:(message,groupId) => dispatch(postChat(message, groupId)),
+    uploadProfile:(picture) => dispatch(uploadProfile(picture)),
     
 
     fetchUsers: () =>{dispatch(fetchUsers())},
@@ -106,12 +108,14 @@ class Main extends Component{
                     <Switch>
                         <Route path='/home' component={() => <Home />} />
                         <Route exact path='/signup' component={() => <Signup postSignup={this.props.postSignup}/>} />
-                        <PrivateRoute exact path="/profile" component={() => <Profile users={this.props.users} auth={this.props.auth} updateProfile={this.props.updateProfile}/>} />
+                        <PrivateRoute exact path="/profile" component={() => <Profile users={this.props.users} auth={this.props.auth} 
+                                        updateProfile={this.props.updateProfile} uploadProfile={this.props.uploadProfile}/>} />
                         <PrivateRoute exact path="/notice_board" component={() => <Notice notices={this.props.notices} 
                                         comments={this.props.comments} postNotice={this.props.postNotice} postComment={this.props.postComment} 
                                         deleteNotice={this.props.deleteNotice} deleteComment={this.props.deleteComment}/>} />
                         <PrivateRoute exact path='/groups' component={() => <Groups groups={this.props.groups} makeGroup={this.props.makeGroup} joinGroup={this.props.joinGroup}
-                                                                            auth={this.props.auth} users={this.props.users.users}/>} />
+                                                                            auth={this.props.auth} users={this.props.users.users}
+                                                                            fetchUsers={this.props.fetchUsers}/>} />
                         <PrivateRoute path='/groups/:groupId' component={GroupwithId} />
                         <Redirect to="/home" />
                     </Switch>

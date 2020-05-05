@@ -41,6 +41,11 @@ class AuthorDetail extends Component{
                         </div>
                         <hr></hr>
                         <div className="row">
+                            <div className="col-12 col-md-4"><h4>Email:</h4></div>
+                            <div className="col-12 col-md-8"><h4>{this.props.author.email} </h4></div>
+                        </div>
+                        <hr></hr>
+                        <div className="row">
                             <div className="col-12 col-md-4"><h4>Date of Birth:</h4></div>
                             <div className="col-12 col-md-8"><h4>{this.props.author.dateofbirth} </h4></div>
                         </div>

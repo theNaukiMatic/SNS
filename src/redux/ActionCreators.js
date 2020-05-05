@@ -641,7 +641,9 @@ export const joinGroup = (groupId, password) => (dispatch) => {
     })
     .then(response => response.json())
     .then(response => {console.log('Group Joined' + response);
-                        dispatch(fetchGroups())})
+                        dispatch(fetchUsers());
+                        dispatch(fetchGroups());
+                    })
     .catch(error => { console.log('joinGroup', error.message);
         alert('group could not be joined \nError: '+ error.message); })
 }
@@ -686,5 +688,46 @@ export const postChat = (message,groupId) => (dispatch) => {
                         dispatch(fetchGroupchat())})
     .catch(error => { console.log('postChat', error.message);
         alert('message could not be sent \nError: '+ error.message); })
+}
+/////////////////////////////////////////////////////////////////////////
+
+//upload profile photo
+export const uploadProfile = (picture) => (dispatch) => {
+
+    const newProfile = {
+        imageFile:picture
+    }
+    console.log('newProfile:', newProfile);
+
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'users/uploadProfile', {
+        method: 'POST',
+        body: JSON.stringify(newProfile),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        },
+        credentials: 'same-origin'
+    })
+    .then((response) => {
+        if (response.ok) {
+            return response;
+        }
+        else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    },
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+    })
+    .then(response => response.json())
+    .then(response => {console.log('messagesent' + response);
+                        dispatch(fetchUsers())})
+    .catch(error => { console.log('postProfile', error.message);
+        alert('profilephoto could not be uploaded \nError: '+ error.message); })
 }
 /////////////////////////////////////////////////////////////////////////

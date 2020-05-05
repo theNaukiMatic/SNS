@@ -5,6 +5,7 @@ import { Control, LocalForm} from 'react-redux-form';
 
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { fetchUsers } from '../redux/ActionCreators';
 
 class GroupForm extends Component{
     constructor(props){
@@ -81,8 +82,15 @@ function RenderGroups({groups,me}){
 }
 
 class JoinGroups extends Component{
+    constructor(props){
+        super(props);
+    }
     render(){
+
+        // console.log(A.filter(n => !B.includes(n)));
+        
         const gro = this.props.groups.map((group) => {
+
             return(
                 <div className="row">
                     <div className="col-6"  key={group._id}>
@@ -146,8 +154,10 @@ class Groups extends Component{
         }
         
         else{
+            fetchUsers();       
             const me = this.props.users.filter((user) => user.username === this.props.auth.user.username)[0];
         console.log(me);
+        // const ha = this.props.groups.groups.filter((group) => me.groups.includes(group) === false);
 
         return(
             <div className="container">
@@ -197,7 +207,7 @@ class Groups extends Component{
                     </LocalForm>
                 </div>
                 <hr></hr>
-                <JoinGroups groups={this.props.groups.groups} joinGroup={this.props.joinGroup}/>
+                <JoinGroups groups={this.props.groups.groups} joinGroup={this.props.joinGroup} me={me}/>
                 <div className="row mb-5 mt-3">
                     <h1><span className="fa fa-users"></span>Your Groups</h1>
                 </div>

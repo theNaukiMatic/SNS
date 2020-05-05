@@ -21,7 +21,7 @@ function RenderProfile({user}){
             <div className="row">
                 <div className="col-12 col-md-3 offset-md-1">
                     <Card>
-                        <CardImg top src={user.image} alt={user.firstname} />
+                        <CardImg top src={baseUrl + user.image} alt={user.firstname} />
                     </Card>
                 </div>
                 <div className="col-12 col-md-7">
@@ -67,15 +67,23 @@ class ProfileForm extends Component{
             };
          this.onDrop = this.onDrop.bind(this);
          this.handleSubmit = this.handleSubmit.bind(this);
+         this.handleSubmit2 = this.handleSubmit2.bind(this);
     }
     onDrop(picture) {
         this.setState({
             pictures: this.state.pictures.concat(picture),
         });
+        this.props.uploadProfile(picture[0]);
     }
     handleSubmit(values) {
         this.props.updateProfile(values.firstname, values.lastname, values.email, values.dateofbirth, values.bio);
+        // this.props.uploadProfile(values.photo);
     } 
+    handleSubmit2(values) {
+        // this.props.updateProfile(values.firstname, values.lastname, values.email, values.dateofbirth, values.bio);
+        this.props.uploadProfile(values.photo);
+    } 
+
 
     render(){
         return(
@@ -93,9 +101,27 @@ class ProfileForm extends Component{
                     imgExtension={['.jpg', '.gif', '.png', '.gif']}
                     maxFileSize={5242880}
                 />
+                <LocalForm onSubmit={(values) => this.handleSubmit2(values)}>
+                    <Row className="form-group">
+                        <Label htmlFor="photo" md={2}>upload photo</Label>
+                        <Col md={10}>
+                            <Control.file model=".photo" id="photo" name="photo"
+                                className="form-file"
+                                />
+                        </Col>
+                        <Row className="form-group">
+                                <Col md={{size:10, offset: 2}}>
+                                    <Button type="submit" color="primary">
+                                    Upload photo
+                                    </Button>
+                                </Col>
+                            </Row>
+                    </Row>
+                </LocalForm>
                 <div className="row">
                     <div className="col-12 col-md-8">
                         <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                            
                             <Row className="form-group">
                                 <Label htmlFor="firstname" md={2}>First Name</Label>
                                 <Col md={10}>
@@ -211,7 +237,7 @@ function Profile(props){
                     </Row>
                 </LocalForm>
 
-                <ProfileForm updateProfile={props.updateProfile}/>
+                <ProfileForm updateProfile={props.updateProfile} uploadProfile={props.uploadProfile}/>
 
 
             </div>
