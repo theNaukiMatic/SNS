@@ -101,6 +101,52 @@ function RenderComments({comments}){
         </div>
     );
 }
+
+class PostNotice extends Component{
+
+    constructor(props) {
+        super(props);
+         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleSubmit(values) {
+        this.props.postNotice(values.title, values.message);
+    } 
+    render(){
+        return(
+        <div>
+            <h2 className="mb-3">Post a new Notice</h2>
+            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                <Row className="form-group">
+                    <Label htmlFor="title" md={2}>Title</Label>
+                    <Col md={10}>
+                        <Control.text model=".title" id="title" name="title"
+                            placeholder="Title"
+                            className="form-control"
+                                />
+                    </Col>
+                </Row>
+                <Row className="form-group">
+                    <Label htmlFor="message" md={2}>Message</Label>
+                    <Col md={10}>
+                        <Control.text model=".message" id="message" name="message"
+                            placeholder="message"
+                            className="form-control"
+                                />
+                    </Col>
+                </Row>
+                
+                <Row className="form-group">
+                    <Col md={{size:10, offset: 2}}>
+                        <Button type="submit" color="primary">
+                       Post Notice
+                        </Button>
+                    </Col>
+                </Row>
+            </LocalForm>
+        </div>
+        );
+    }
+}
 function RenderNotices({notices,comments}){
     const not = notices.map((notice) =>{
         
@@ -127,7 +173,7 @@ function RenderNotices({notices,comments}){
                                 <p>{<AuthorDetail author={notice.author} />}</p>
                             </div>
                             <div className="col-3">
-                            <p>on {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(notice.dateofpost)))}</p>
+                            <p>on {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(notice.createdAt)))}</p>
                             </div>
                         </div>
                         <RenderComments comments={comments.filter((coms) => coms.notice === notice._id)}/>
@@ -197,6 +243,9 @@ function Notice(props){
                     <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
                     <BreadcrumbItem active>Notice Board</BreadcrumbItem>
                 </Breadcrumb>
+            </div>
+            <div >
+                <PostNotice postNotice={props.postNotice}/>
             </div>
             <div className="row mt-5">
                 <div className="col-12 mb-5">

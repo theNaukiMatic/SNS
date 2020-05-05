@@ -398,3 +398,46 @@ export const updateProfile = (firstname, lastname, email, dateofbirth, bio) => (
         alert('could not update profile \nError: '+ error.message); })
 }
 /////////////////////////////////////////////////////////////////////////
+
+
+//post a new notice
+export const postNotice = (title, message) => (dispatch) => {
+
+    const newNotice = {
+        title:title,
+        message:message
+    }
+    console.log('new notice :', newNotice);
+
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'noticeBoard/', {
+        method: 'POST',
+        body: JSON.stringify(newNotice),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        },
+        credentials: 'same-origin'
+    })
+    .then((response) => {
+        if (response.ok) {
+            return response;
+        }
+        else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    },
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+    })
+    .then(response => response.json())
+    .then(response => {console.log('notice posted successfully' + response);
+                        dispatch(fetchNotices())})
+    .catch(error => { console.log('post Notice', error.message);
+        alert('could not post notice \nError: '+ error.message); })
+}
+/////////////////////////////////////////////////////////////////////////
