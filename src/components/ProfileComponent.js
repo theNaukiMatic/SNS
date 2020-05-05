@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {Card, CardImg ,CardBody,  Breadcrumb, BreadcrumbItem, Button, Row, Col, Label} from 'reactstrap';
+import {Card, CardImg ,CardBody,  Breadcrumb, BreadcrumbItem, Button, Row, Col, Label, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import {Link} from 'react-router-dom';
 
@@ -174,6 +174,7 @@ class ProfileForm extends Component{
                             </Row>
                         </LocalForm>
                     </div>
+                    
                 </div>
 
 
@@ -181,6 +182,87 @@ class ProfileForm extends Component{
         );
     }
 
+}
+
+class Search extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            isModalOpen : false,
+            author:{}
+        };
+        this.toggleModal = this.toggleModal.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+
+    }
+    toggleModal() {
+        this.setState({
+          isModalOpen: !this.state.isModalOpen
+        });
+      }
+      handleSubmit(values) {
+        const find = this.props.users.filter((user) => user.username === values.search)[0];
+        this.setState({author:find});
+        this.toggleModal();
+    } 
+    render(){
+        
+        return(
+        <div>
+            <LocalForm className="mt-5" onSubmit={(values) => this.handleSubmit(values)}>
+                <Row className="form-group">
+                    <Label htmlFor="firstname" md={{size:2, offset: 2}}>Search other Users</Label>
+                    <Col md={6}>
+                        <Control.text model=".search" id="search" name="search"
+                            placeholder="enter username"
+                            className="form-control"
+                        />
+                    </Col>
+                    <Col md={{size:2}}>
+                        <Button type="submit" color="primary">
+                        Search
+                        </Button>
+                    </Col>
+                </Row>
+                <Row className="form-group">
+
+                </Row>
+            </LocalForm>
+            <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                <ModalHeader toggle={this.toggleModal}>{this.state.author.firstname} {this.state.author.lastname}</ModalHeader>
+                <ModalBody>
+                {/* <img src={this.props.author.image} alt={this.props.author.name}></img> */}
+                    <div className="row">
+                        <div className="col-12 col-md-4"><h4>Name:</h4></div>
+                        <div className="col-12 col-md-8"><h4>{this.state.author.firstname} {this.state.author.lastname}</h4></div>
+                    </div>
+                    <hr></hr>
+                    <div className="row">
+                        <div className="col-12 col-md-4"><h4>UserName:</h4></div>
+                        <div className="col-12 col-md-8"><h4>{this.state.author.username} </h4></div>
+                    </div>
+                    <hr></hr>
+                    <div className="row">
+                        <div className="col-12 col-md-4"><h4>Email:</h4></div>
+                        <div className="col-12 col-md-8"><h4>{this.state.author.email} </h4></div>
+                    </div>
+                    <hr></hr>
+                    <div className="row">
+                        <div className="col-12 col-md-4"><h4>Date of Birth:</h4></div>
+                        <div className="col-12 col-md-8"><h4>{this.state.author.dateofbirth} </h4></div>
+                    </div>
+                    <hr></hr>
+                    <div className="row">
+                        <div className="col-12 col-md-4"><h4>Bio:</h4></div>
+                        <div className="col-12 col-md-8"><h4>{this.state.author.bio} </h4></div>
+                    </div>
+                </ModalBody>
+            </Modal>
+        </div>
+            
+
+        );
+    }
 }
 
 function Profile(props){
@@ -217,26 +299,7 @@ function Profile(props){
 
                 <RenderProfile user={props.users.users.filter((user) => user.username === props.auth.user.username)[0]} />
 
-                <LocalForm className="mt-5">
-                    <Row className="form-group">
-                        <Label htmlFor="firstname" md={{size:2, offset: 2}}>Search other Users</Label>
-                        <Col md={6}>
-                            <Control.text model=".search" id="search" name="search"
-                                placeholder="enter username"
-                                className="form-control"
-                            />
-                        </Col>
-                        <Col md={{size:2}}>
-                            <Button type="submit" color="primary">
-                            Search
-                            </Button>
-                        </Col>
-                    </Row>
-                    <Row className="form-group">
-
-                    </Row>
-                </LocalForm>
-
+                <Search users={props.users.users} />
                 <ProfileForm updateProfile={props.updateProfile} uploadProfile={props.uploadProfile}/>
 
 
