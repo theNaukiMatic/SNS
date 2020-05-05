@@ -652,7 +652,7 @@ export const postChat = (message,groupId) => (dispatch) => {
 
     const newChat = {
         message:message,
-        groupId:groupId
+        group:groupId
     }
     console.log('newChat:', newChat);
 
